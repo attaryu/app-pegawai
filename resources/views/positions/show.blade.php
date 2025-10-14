@@ -29,6 +29,7 @@
                 <th scope="col">Nama Lengkap</th>
                 <th scope="col">Email</th>
                 <th scope="col">Nomor Telepon</th>
+                <th scope="col">Departemen</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                     <th scope="row">{{ $employee->nama_lengkap }}</th>
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->nomor_telepon }}</td>
+                    <td>{{ $employee->department->nama_departemen }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -15,6 +15,7 @@
             <tr>
                 <th scope="col">Nama Jabatan</th>
                 <th scope="col">Gaji Pokok</th>
+                <th scope="col">Jumlah Karyawan</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <tr>
                     <th scope="row">{{ $position->nama_jabatan }}</th>
                     <td>Rp {{ number_format($position->gaji_pokok, 0, ',', '.') }}</td>
+                    <td>{{ $position->employees_count }}</td>
 
                     <td style="display: flex; align-items: center; gap: 0.5rem">
                         <a role="button" href="{{ route('positions.show', $position->id) }}" style="padding: 4px; width: fit-content; height: fit-content">Detail</a>

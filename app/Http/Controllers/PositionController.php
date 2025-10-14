@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Position;
 use Illuminate\Http\Request;
-use NumberFormatter;
 
 class PositionController extends Controller
 {
@@ -13,7 +12,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $positions = Position::query()->orderByDesc('updated_at')->get();
+        $positions = Position::withCount('employees')->latest()->paginate(5);
 
         return view('positions.index', compact('positions'));
     }
@@ -46,7 +45,7 @@ class PositionController extends Controller
      */
     public function show(string $id)
     {
-        $position = Position::with('employees')->find($id);
+        $position = Position::with('employees.department')->find($id);
 
         return view('positions.show', compact('position'));
     }
