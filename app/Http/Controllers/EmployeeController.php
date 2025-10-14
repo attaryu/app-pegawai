@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -12,7 +14,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::latest()->paginate(5);
+        $employees = Employee::with(['department', 'position'])->latest()->paginate(5);
+
         return view('employees.index', compact('employees'));
     }
 
@@ -21,7 +24,10 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $departments = Department::select('id', 'nama_departemen')->get();
+        $positions = Position::select('id', 'nama_jabatan')->get();
+
+        return view('employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -37,9 +43,22 @@ class EmployeeController extends Controller
             'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'status' => 'required|string|max:50',
+            'departemen_id' => 'required|exists:departments,id',
+            'jabatan_id' => 'required|exists:positions,id',
         ]);
 
-        Employee::create($request->all());
+        Employee::create($request->only([
+            'nama_lengkap',
+            'email',
+            'nomor_telepon',
+            'tanggal_lahir',
+            'alamat',
+            'tanggal_masuk',
+            'status',
+            'departemen_id',
+            'jabatan_id',
+        ]));
+
         return redirect()->route('employees.index');
     }
 
@@ -48,7 +67,8 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::with(['department', 'position'])->find($id);
+
         return view('employees.show', compact('employee'));
     }
 
@@ -58,7 +78,10 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         $employee = Employee::find($id);
-        return view('employees.edit', compact('employee'));
+        $departments = Department::select('id', 'nama_departemen')->get();
+        $positions = Position::select('id', 'nama_jabatan')->get();
+
+        return view('employees.edit', compact('employee', 'departments', 'positions'));
     }
 
     /**
@@ -74,9 +97,11 @@ class EmployeeController extends Controller
             'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'status' => 'required|string|max:50',
+            'departemen_id' => 'required|exists:departments,id',
+            'jabatan_id' => 'required|exists:positions,id',
         ]);
 
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::find($id);
         $employee->update($request->only([
             'nama_lengkap',
             'email',
@@ -85,6 +110,8 @@ class EmployeeController extends Controller
             'alamat',
             'tanggal_masuk',
             'status',
+            'departemen_id',
+            'jabatan_id',
         ]));
 
         return redirect()->route('employees.index');

@@ -50,6 +50,24 @@
                         <option value="nonaktif">Nonaktif</option>
                     </select>
                 </label>
+
+                <label for="departemen_id">
+                    Departemen
+                    <select id="departemen_id" name="departemen_id">
+                        @foreach ($departments as $department)
+                            <option value="{{ $department->id }}">{{ $department->nama_departemen }}</option>
+                        @endforeach
+                    </select>
+                </label>
+
+                <label for="jabatan_id">
+                    Jabatan
+                    <select id="jabatan_id" name="jabatan_id">
+                        @foreach ($positions as $position)
+                            <option value="{{ $position->id }}">{{ $position->nama_jabatan }}</option>
+                        @endforeach
+                    </select>
+                </label>
             </div>
         </fieldset>
 

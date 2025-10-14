@@ -41,6 +41,16 @@
                 <th scope="row">Status</th>
                 <td>{{ $employee->status }}</td>
             </tr>
+
+            <tr>
+                <th scope="row">Departemen</th>
+                <td>{{ $employee->department->nama_departemen }}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Jabatan</th>
+                <td>{{ $employee->position->nama_jabatan }}</td>
+            </tr>
         </tbody>
     </table>
 @endsection

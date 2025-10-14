@@ -54,6 +54,29 @@
                         </option>
                     </select>
                 </label>
+
+
+                <label for="departemen_id">
+                    Departemen
+                    <select id="departemen_id" name="departemen_id">
+                        @foreach ($departments as $department)
+                            <option value="{{ $department->id }}" {{ old('departemen_id', $employee->departemen_id) == $department->id ? 'selected' : '' }}>
+                                {{ $department->nama_departemen }}
+                            </option>
+                        @endforeach
+                    </select>
+                </label>
+
+                <label for="jabatan_id">
+                    Jabatan
+                    <select id="jabatan_id" name="jabatan_id">
+                        @foreach ($positions as $position)
+                            <option value="{{ $position->id }}" {{ old('jabatan_id', $employee->jabatan_id) == $position->id ? 'selected' : '' }}>
+                                {{ $position->nama_jabatan }}
+                            </option>
+                        @endforeach
+                    </select>
+                </label>
             </div>
         </fieldset>
 

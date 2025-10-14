@@ -16,10 +16,9 @@
                 <th scope="col">Nama Lengkap</th>
                 <th scope="col">Email</th>
                 <th scope="col">Nomor Telepon</th>
-                <th scope="col">Tanggal Lahir</th>
-                <th scope="col">Alamat</th>
-                <th scope="col">Tanggal Masuk</th>
                 <th scope="col">Status</th>
+                <th scope="col">Departemen</th>
+                <th scope="col">Jabatan</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
@@ -30,10 +29,9 @@
                     <th scope="row">{{ $employee->nama_lengkap }}</th>
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->nomor_telepon }}</td>
-                    <td>{{ $employee->tanggal_lahir }}</td>
-                    <td>{{ $employee->alamat }}</td>
-                    <td>{{ $employee->tanggal_masuk }}</td>
                     <td>{{ $employee->status }}</td>
+                    <td>{{ $employee->department->nama_departemen }}</td>
+                    <td>{{ $employee->position->nama_jabatan }}</td>
 
                     <td style="display: flex; flex-direction: column; gap: 0.5rem">
                         <a role="button" href="{{ route('employees.show', $employee->id) }}" style="padding: 4px">Detail</a>
