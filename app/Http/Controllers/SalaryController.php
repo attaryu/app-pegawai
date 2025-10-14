@@ -103,6 +103,7 @@ class SalaryController extends Controller
      */
     public function destroy(Salary $salary)
     {
-        
+        $salary->delete();
+        return redirect()->route('salaries.index');
     }
 }
