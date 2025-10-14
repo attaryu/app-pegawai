@@ -16,11 +16,12 @@
             </p>
 
             <ul style="font-size:0.9rem">
-                <li><a href="{{ url('/employees') }}">Employee</a></li>
-                <li><a href="{{ url('/departments') }}">Department</a></li>
-                <li><a href="{{ url('/attendances') }}">Attendance</a></li>
-                <li><a href="{{ url('/reports') }}">Report</a></li>
-                <li><a href="{{ url('/settings') }}">Settings</a></li>
+                <li><a href="{{ route('employees.index') }}">Karyawan</a></li>
+                <li><a href="{{ route('departments.index') }}">Departemen</a></li>
+                <li><a href="{{ route('positions.index') }}">Posisi</a></li>
+                {{-- <li><a href="{{ route('attendances.index') }}">Kehadiran</a></li> --}}
+                {{-- <li><a href="{{ route('reports.index') }}">Laporan</a></li>
+                <li><a href="{{ route('settings.index') }}">Pengaturan</a></li> --}}
             </ul>
         </nav>
 
