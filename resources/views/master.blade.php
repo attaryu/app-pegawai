@@ -20,8 +20,8 @@
                 <li><a href="{{ route('departments.index') }}">Departemen</a></li>
                 <li><a href="{{ route('positions.index') }}">Posisi</a></li>
                 <li><a href="{{ route('attendances.index') }}">Kehadiran</a></li>
-                {{-- <li><a href="{{ route('reports.index') }}">Laporan</a></li>
-                <li><a href="{{ route('settings.index') }}">Pengaturan</a></li> --}}
+                <li><a href="{{ route('salaries.index') }}">Gaji</a></li>
+                {{-- <li><a href="{{ route('settings.index') }}">Pengaturan</a></li> --}}
             </ul>
         </nav>
 
@@ -33,6 +33,12 @@
             &copy; @yield('year', '2025') App Pegawai
         </p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>
