@@ -51,6 +51,16 @@
                 <th scope="row">Jabatan</th>
                 <td>{{ $employee->position->nama_jabatan }}</td>
             </tr>
+
+            <tr>
+                <th scope="row">Jumlah Kehadiran</th>
+                <td>{{ $employee->attendance->where('status', 'hadir')->count() }}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Total gaji</th>
+                <td>Rp {{ number_format($employee->salaries->sum('total_gaji'), 0, '', '.') }}</td>
+            </tr>
         </tbody>
     </table>
 @endsection

@@ -67,7 +67,7 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        $employee = Employee::with(['department', 'position'])->find($id);
+        $employee = Employee::with(['department', 'position', 'attendance', 'salaries'])->find($id);
 
         return view('employees.show', compact('employee'));
     }
