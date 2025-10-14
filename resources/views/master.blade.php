@@ -19,7 +19,7 @@
                 <li><a href="{{ route('employees.index') }}">Karyawan</a></li>
                 <li><a href="{{ route('departments.index') }}">Departemen</a></li>
                 <li><a href="{{ route('positions.index') }}">Posisi</a></li>
-                {{-- <li><a href="{{ route('attendances.index') }}">Kehadiran</a></li> --}}
+                <li><a href="{{ route('attendances.index') }}">Kehadiran</a></li>
                 {{-- <li><a href="{{ route('reports.index') }}">Laporan</a></li>
                 <li><a href="{{ route('settings.index') }}">Pengaturan</a></li> --}}
             </ul>
