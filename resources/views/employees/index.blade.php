@@ -5,7 +5,6 @@
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <hgroup style="padding-top: 2rem">
             <h1>Daftar Pegawai</h1>
-            <p>TEKIK INFORMATIKA - PENS 28</p>
         </hgroup>
 
         <a href="{{ route('employees.create') }}" role="button">Tambah</a>

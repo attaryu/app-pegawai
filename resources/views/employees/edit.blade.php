@@ -4,7 +4,6 @@
 @section('content')
     <hgroup style="padding-top: 2rem">
         <h1>Edit Data Pegawai</h1>
-        <p>TEKIK INFORMATIKA - PENS 28</p>
     </hgroup>
 
     <form action="{{ route('employees.update', $employee->id) }}" method="POST" style="margin-top: 2rem">

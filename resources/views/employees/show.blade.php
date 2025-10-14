@@ -1,9 +1,8 @@
 @extends('master')
-@section('title', 'Daftar Pegawai')
+@section('title', 'Detail Pegawai')
 @section('content')
     <hgroup style="padding-top: 2rem">
         <h1>Pegawai</h1>
-        <p>TEKIK INFORMATIKA - PENS 28</p>
     </hgroup>
 
     <table style="margin-top: 2rem" class="striped overflow-auto">
