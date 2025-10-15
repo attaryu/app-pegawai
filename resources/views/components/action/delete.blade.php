@@ -5,7 +5,7 @@
     @method('DELETE')
     @csrf
 
-    <button type="submit" role="link" onclick="return confirm('Yakin ingin menghapus?')" style="padding: 4px; width: 40px; height: 40px; margin: 0">
+    <button type="submit" role="link" class="outline" onclick="return confirm('Yakin ingin menghapus?')" style="padding: 4px; width: 40px; height: 40px; margin: 0; color: oklch(63.7% 0.237 25.331); border-color: oklch(63.7% 0.237 25.331)">
         <i class="fa-solid fa-sm fa-trash-can"></i>
     </button>
 </form>
