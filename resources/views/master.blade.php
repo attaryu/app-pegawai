@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.amber.min.css">
+    <script src="https://kit.fontawesome.com/994c85c9fb.js" crossorigin="anonymous"></script>
     <title>@yield('title', 'App Pegawai')</title>
 </head>
 
@@ -36,8 +37,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
-    </script>
-
+        </script>
     @stack('scripts')
 </body>
 

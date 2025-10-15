@@ -21,19 +21,11 @@
                     <th scope="row">{{ $department->nama_departemen }}</th>
                     <td>{{ $department->employees_count }}</td>
 
-                    <td style="display: flex; gap: 0.5rem">
-                        <a role="button" href="{{ route('departments.show', $department->id) }}"
-                            style="padding: 4px; width: fit-content; height: fit-content">Detail</a>
-                        <a role="button" href="{{ route('departments.edit', $department->id) }}"
-                            style="padding: 4px; width: fit-content; height: fit-content">Edit</a>
-
-                        <form action="{{ route('departments.destroy', $department->id) }}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" role="link" style="padding: 4px; width: fit-content; height: fit-content"
-                                onclick="return confirm('Yakin ingin menghapus?')" style="padding: 4px">Delete</button>
-                        </form>
-                    </td>
+                    <x-action route-name="departments" :id="$department->id">
+                        <x-action.detail />
+                        <x-action.update />
+                        <x-action.delete />
+                    </x-action>
                 </tr>
             @endforeach
         </tbody>

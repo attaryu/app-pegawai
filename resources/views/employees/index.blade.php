@@ -33,17 +33,11 @@
                     <td>{{ $employee->department->nama_departemen }}</td>
                     <td>{{ $employee->position->nama_jabatan }}</td>
 
-                    <td style="display: flex; flex-direction: column; gap: 0.5rem">
-                        <a role="button" href="{{ route('employees.show', $employee->id) }}" style="padding: 4px">Detail</a>
-                        <a role="button" href="{{ route('employees.edit', $employee->id) }}" style="padding: 4px">Edit</a>
-
-                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" role="link" onclick="return confirm('Yakin ingin menghapus?')"
-                                style="padding: 4px">Delete</button>
-                        </form>
-                    </td>
+                    <x-action route-name="employees" :id="$employee->id">
+                        <x-action.detail />
+                        <x-action.update />
+                        <x-action.delete />
+                    </x-action>
                 </tr>
             @endforeach
         </tbody>

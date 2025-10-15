@@ -37,17 +37,10 @@
                     <td>{{ $format($salary->potongan) }}</td>
                     <td>{{ $format($salary->total_gaji) }}</td>
 
-                    <td style="display: flex; align-items: center; gap: 0.5rem">
-                        <a role="button" href="{{ route('salaries.edit', $salary->id) }}"
-                            style="padding: 4px; width: fit-content; height: fit-content">Edit</a>
-
-                        <form action="{{ route('salaries.destroy', $salary->id) }}" method="POST" style="height: fit-content;">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" role="link" onclick="return confirm('Yakin ingin menghapus?')"
-                                style="padding: 4px; width: fit-content; height: fit-content; margin: 0">Delete</button>
-                        </form>
-                    </td>
+                    <x-action route-name="salaries" :id="$salary->id">
+                        <x-action.update />
+                        <x-action.delete />
+                    </x-action>
                 </tr>
             @endforeach
         </tbody>

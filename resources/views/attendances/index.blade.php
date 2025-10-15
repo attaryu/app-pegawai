@@ -1,5 +1,5 @@
 @php
-    $format = fn (string | null $date) => $date ? date_format(date_create($date), 'H:i') : '-';
+    $format = fn(string|null $date) => $date ? date_format(date_create($date), 'H:i') : '-';
 @endphp
 
 @extends('master')
@@ -35,18 +35,10 @@
                     <td>{{ $format($attendance->waktu_masuk) }}</td>
                     <td>{{ $format($attendance->waktu_keluar) }}</td>
 
-                    <td style="display: flex; align-items: center; gap: 0.5rem">
-                        <a role="button" href="{{ route('attendances.edit', $attendance->id) }}"
-                            style="padding: 4px; width: fit-content; height: fit-content">Edit</a>
-
-                        <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST"
-                            style="height: fit-content;">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" role="link" onclick="return confirm('Yakin ingin menghapus?')"
-                                style="padding: 4px; width: fit-content; height: fit-content; margin: 0">Delete</button>
-                        </form>
-                    </td>
+                    <x-action route-name="attendances" :id="$attendance->id">
+                        <x-action.update />
+                        <x-action.delete />
+                    </x-action>
                 </tr>
             @endforeach
         </tbody>

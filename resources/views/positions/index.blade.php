@@ -27,17 +27,11 @@
                     <td>Rp {{ number_format($position->gaji_pokok, 0, ',', '.') }}</td>
                     <td>{{ $position->employees_count }}</td>
 
-                    <td style="display: flex; align-items: center; gap: 0.5rem">
-                        <a role="button" href="{{ route('positions.show', $position->id) }}" style="padding: 4px; width: fit-content; height: fit-content">Detail</a>
-                        <a role="button" href="{{ route('positions.edit', $position->id) }}" style="padding: 4px; width: fit-content; height: fit-content">Edit</a>
-
-                        <form action="{{ route('positions.destroy', $position->id) }}" method="POST" style="height: fit-content;">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" role="link" onclick="return confirm('Yakin ingin menghapus?')"
-                                style="padding: 4px; width: fit-content; height: fit-content; margin: 0">Delete</button>
-                        </form>
-                    </td>
+                    <x-action route-name="positions" :id="$position->id">
+                        <x-action.detail />
+                        <x-action.update />
+                        <x-action.delete />
+                    </x-action>
                 </tr>
             @endforeach
         </tbody>
