@@ -13,7 +13,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::with('employee')->get();
+        $salaries = Salary::with('employee')->paginate(10);
 
         return view('salaries.index', compact('salaries'));
     }

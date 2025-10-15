@@ -46,8 +46,8 @@
                 <label for="status">
                     Status
                     <select id="status" name="status">
-                        <option value="aktif">Aktif</option>
-                        <option value="nonaktif">Nonaktif</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Nonaktif">Nonaktif</option>
                     </select>
                 </label>
 

@@ -26,10 +26,10 @@
                 <label for="status">
                     Status
                     <select id="status" name="status">
-                        <option value="hadir" selected>Hadir</option>
-                        <option value="izin">Izin</option>
-                        <option value="sakit">Sakit</option>
-                        <option value="alpha">Alpha</option>
+                        <option value="Hadir" selected>Hadir</option>
+                        <option value="Izin">Izin</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Alpha">Alpha</option>
                     </select>
                 </label>
             </div>

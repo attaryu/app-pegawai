@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_lengkap', 100);
             $table->string('email', 100);
-            $table->string('nomor_telepon', 15);
+            $table->string('nomor_telepon', 25);
             $table->date('tanggal_lahir');
             $table->text('alamat');
             $table->date('tanggal_masuk');
