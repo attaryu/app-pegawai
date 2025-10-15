@@ -7,9 +7,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn() => view('index'))->name('index');
 
 Route::resource('employees', EmployeeController::class);
 Route::resource('departments', DepartmentController::class);

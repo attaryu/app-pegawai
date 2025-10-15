@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
 
 <head>
     <meta charset="utf-8">
@@ -10,28 +10,33 @@
 </head>
 
 <body>
-    <main class="container">
+    <main class="container" style="min-height: 90dvh;">
         <nav>
             <p style="font-size: 1.2rem;">
                 <strong>@yield('nav-title', 'App Pegawai')</strong>
             </p>
 
             <ul style="font-size:0.9rem">
+                <li><a href="{{ route('index') }}">Beranda</a></li>
                 <li><a href="{{ route('employees.index') }}">Karyawan</a></li>
                 <li><a href="{{ route('departments.index') }}">Departemen</a></li>
                 <li><a href="{{ route('positions.index') }}">Posisi</a></li>
                 <li><a href="{{ route('attendances.index') }}">Kehadiran</a></li>
                 <li><a href="{{ route('salaries.index') }}">Gaji</a></li>
-                {{-- <li><a href="{{ route('settings.index') }}">Pengaturan</a></li> --}}
             </ul>
         </nav>
 
         @yield('content')
     </main>
 
-    <footer>
-        <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">
-            &copy; @yield('year', '2025') App Pegawai
+    <footer style="display: flex; align-items: center; justify-content: center; gap: 2rem;">
+        <p style="color: var(--muted-color); margin-bottom: 1rem;">
+            <i class="fa-solid fa-graduation-cap" style="margin-right: 0.5rem;"></i>
+            Dikembangkan sebagai bagian dari pembelajaran
+        </p>
+
+        <p style="color: var(--muted-color); font-size: 0.9rem;">
+            <strong>TEKNIK INFORMATIKA - PENS 2025</strong>
         </p>
     </footer>
 
