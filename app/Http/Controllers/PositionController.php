@@ -12,7 +12,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $positions = Position::withCount('employees')->latest()->paginate(5);
+        $positions = Position::withCount('employees')->latest()->paginate(10);
 
         return view('positions.index', compact('positions'));
     }

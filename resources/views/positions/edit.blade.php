@@ -2,9 +2,7 @@
 @section('title', 'Edit Data Posisi')
 
 @section('content')
-    <hgroup style="padding-top: 2rem">
-        <h1>Edit Data Posisi</h1>
-    </hgroup>
+    <x-header title="Edit Data Posisi" />
 
     <form action="{{ route('positions.update', $position->id) }}" method="POST" style="margin-top: 2rem">
         @csrf

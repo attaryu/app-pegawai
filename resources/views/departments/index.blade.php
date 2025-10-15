@@ -1,10 +1,7 @@
 @extends('master')
 @section('title', 'Daftar Departemen')
 @section('content')
-    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2rem">
-        <h1>Daftar Departement</h1>
-        <a href="{{ route('departments.create') }}" role="button">Tambah</a>
-    </div>
+    <x-header title="Daftar Departemen" :paginator="$departments" create-route-name="departments.create" />
 
     <table style="margin-top: 2rem" class="striped overflow-auto">
         <thead>

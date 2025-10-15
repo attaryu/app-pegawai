@@ -1,9 +1,7 @@
 @extends('master')
 @section('title', 'Detail Posisi')
 @section('content')
-    <hgroup style="padding-top: 2rem">
-        <h1>Posisi</h1>
-    </hgroup>
+    <x-header title="Detail Posisi" />
 
     <table style="margin-top: 2rem" class="striped overflow-auto">
         <tbody>

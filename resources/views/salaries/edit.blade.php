@@ -2,9 +2,7 @@
 @section('title', 'Edit Data Gaji')
 
 @section('content')
-    <hgroup style="padding-top: 2rem">
-        <h1>Edit Data Gaji</h1>
-    </hgroup>
+    <x-header title="Edit Data Gaji" />
 
     <form action="{{ route('salaries.update', $salary->id) }}" method="POST" style="margin-top: 2rem">
         @csrf

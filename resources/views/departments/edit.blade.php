@@ -2,9 +2,7 @@
 @section('title', 'Edit Data Departemen')
 
 @section('content')
-    <hgroup style="padding-top: 2rem">
-        <h1>Edit Data Departemen</h1>
-    </hgroup>
+    <x-header title="Edit Data Departemen" />
 
     <form action="{{ route('departments.update', $department->id) }}" method="POST" style="margin-top: 2rem">
         @csrf

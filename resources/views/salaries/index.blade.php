@@ -6,13 +6,7 @@
 @section('title', 'Daftar Gaji')
 
 @section('content')
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <hgroup style="padding-top: 2rem">
-            <h1>Daftar Gaji</h1>
-        </hgroup>
-
-        <a href="{{ route('salaries.create') }}" role="button">Tambah</a>
-    </div>
+    <x-header title="Daftar Gaji" :paginator="$salaries" create-route-name="salaries.create" />
     
     <table style="margin-top: 2rem" class="striped">
         <thead>

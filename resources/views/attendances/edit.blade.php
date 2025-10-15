@@ -6,9 +6,7 @@
 @section('title', 'Edit Data Kehadiran')
 
 @section('content')
-    <hgroup style="padding-top: 2rem">
-        <h1>Edit Data Kehadiran</h1>
-    </hgroup>
+    <x-header title="Edit Data Kehadiran" />
 
     <form action="{{ route('attendances.update', $attendance->id) }}" method="POST" style="margin-top: 2rem">
         @csrf

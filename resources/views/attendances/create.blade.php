@@ -2,9 +2,7 @@
 @section('title', 'Tambah Data Kehadiran')
 
 @section('content')
-    <hgroup style="padding-top: 2rem">
-        <h1>Tambah Data Kehadiran</h1>
-    </hgroup>
+    <x-header title="Tambah Data Kehadiran" />
 
     <form action="{{ route('attendances.store') }}" method="POST" style="margin-top: 2rem">
         @csrf

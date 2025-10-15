@@ -14,7 +14,8 @@ class DepartmentController extends Controller
     {
         $departments = Department::query()
             ->withCount('employees')
-            ->get(['nama_departemen', 'id', 'employees_count']);
+            ->latest()
+            ->paginate(20);
 
         return view('departments.index', compact('departments'));
     }

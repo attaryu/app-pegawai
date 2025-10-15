@@ -2,13 +2,7 @@
 @section('title', 'Daftar Posisi')
 
 @section('content')
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <hgroup style="padding-top: 2rem">
-            <h1>Daftar Posisi</h1>
-        </hgroup>
-
-        <a href="{{ route('positions.create') }}" role="button">Tambah</a>
-    </div>
+    <x-header title="Daftar Posisi" :paginator="$positions" create-route-name="positions.create" />
 
     <table style="margin-top: 2rem" class="striped overflow-auto">
         <thead>
