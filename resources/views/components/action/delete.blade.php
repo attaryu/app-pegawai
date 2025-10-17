@@ -1,7 +1,7 @@
 @aware(['routeName', 'id'])
 @props(['deleteRouteName', 'id'])
 
-<form action="{{ route(isset($routeName) ? $routeName . '.destroy' : $deleteRouteName, $id) }}" method="POST" style="display: inline">
+<form action="{{ route($deleteRouteName ?? $routeName . '.destroy', $id) }}" method="POST" style="display: inline">
     @method('DELETE')
     @csrf
 
