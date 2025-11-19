@@ -6,7 +6,9 @@ use App\Models\Attendance;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Position;
+use App\Models\Role;
 use App\Models\Salary;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,15 +27,26 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $positions = Position::factory()->count(10)->create();
+        $role = Role::factory()->create();
 
         Employee::factory()
-            ->count($departmentCount * rand(10, 20))
+            ->count($departmentCount * rand(7, 13))
             ->sequence(fn() => [
                 'departemen_id' => $departments->random()->id,
                 'jabatan_id' => $positions->random()->id,
             ])
             ->create()
-            ->each(function ($employee) {
+            ->each(function ($employee) use ($role) {
+                if ($employee->status === 'aktif') {
+                    $user = User::factory()
+                        ->for($role)
+                        ->create([
+                            'email' => $employee->email,
+                        ]);
+
+                    $employee->user()->associate($user);
+                }
+
                 Attendance::factory()
                     ->for($employee)
                     ->count(rand(10, max: 20))

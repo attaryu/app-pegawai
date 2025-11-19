@@ -40,4 +40,9 @@ class Employee extends Model
     {
         return $this->hasMany(Salary::class, 'karyawan_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
