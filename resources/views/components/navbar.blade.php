@@ -14,10 +14,11 @@
 <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
     <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
         {{-- name and logo --}}
-        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">AllStaff</span>
         </a>
 
+        {{-- User menu --}}
         @auth
             <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <button type="button"
@@ -72,6 +73,7 @@
             </div>
         @endauth
 
+        {{-- CTA button --}}
         @guest
             <div class="inline-flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <a href="{{ route('login') }}"
@@ -92,6 +94,7 @@
             </div>
         @endguest
 
+        {{-- navbar link --}}
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">

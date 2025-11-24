@@ -8,7 +8,7 @@
     <title>@yield('title', 'App Pegawai')</title>
 </head>
 
-<body class="bg-white dark:bg-gray-900">
+<body class="bg-neutral-primary">
     <main>
         <x-navbar />
 

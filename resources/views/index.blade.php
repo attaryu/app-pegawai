@@ -2,7 +2,7 @@
 @section('title', 'App Pegawai - Dashboard')
 
 @section('content')
-    <section class="w-full h-dvh flex items-center justify-center gap-2 flex-col px-4 text-center bg-linear-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900">
+    <section class="w-full h-dvh flex items-center justify-center gap-2 flex-col px-4 text-center bg-neutral-primary">
         <x-text as="h1">Welcome to AllStaff</x-text>
 
         <x-text as="p" class="mt-2 max-w-xl mx-auto">
