@@ -28,4 +28,12 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
         ];
     }
+
+    public function admin()
+    {
+        return $this->state(fn() => [
+            'email' => env('ADMIN_EMAIL'),
+            'password' => Hash::make(env('ADMIN_PASSWORD')),
+        ]);
+    }
 }

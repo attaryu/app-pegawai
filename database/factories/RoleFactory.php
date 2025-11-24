@@ -20,4 +20,11 @@ class RoleFactory extends Factory
             'name' => 'employee',
         ];
     }
+
+    public function admin()
+    {
+        return $this->state(fn() => [
+            'name' => 'admin',
+        ]);
+    }
 }

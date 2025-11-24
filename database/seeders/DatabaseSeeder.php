@@ -18,16 +18,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->admin()->create([
+            'role_id' => Role::factory()->admin()->create()->id,
+        ]);
+
         $departmentNames = ['HR', 'Finance', 'IT', 'Marketing', 'R&D'];
         $departmentCount = count($departmentNames);
 
         $departments = Department::factory()
             ->sequence(...array_map(fn($name) => ['nama_departemen' => $name], $departmentNames))
-            ->count(count($departmentNames))
+            ->count($departmentCount)
             ->create();
 
         $positions = Position::factory()->count(10)->create();
-        $role = Role::factory()->create();
+        $employeeRole = Role::factory()->create();
 
         Employee::factory()
             ->count($departmentCount * rand(7, 13))
@@ -36,15 +40,16 @@ class DatabaseSeeder extends Seeder
                 'jabatan_id' => $positions->random()->id,
             ])
             ->create()
-            ->each(function ($employee) use ($role) {
+            ->each(function ($employee) use ($employeeRole) {
                 if ($employee->status === 'aktif') {
                     $user = User::factory()
-                        ->for($role)
+                        ->for($employeeRole)
                         ->create([
                             'email' => $employee->email,
                         ]);
 
                     $employee->user()->associate($user);
+                    $employee->save();
                 }
 
                 Attendance::factory()
