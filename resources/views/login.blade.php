@@ -3,55 +3,21 @@
 @section('title', 'Login - App Pegawai')
 
 @section('content')
-    <div style="display: flex; align-items: center; justify-content: center; min-height: 80vh;">
-        <article style="max-width: 400px; width: 100%;">
-            <header>
-                <h2 style="text-align: center; margin-bottom: 0.5rem;">Login</h2>
-                <p style="text-align: center; color: var(--muted-color); font-size: 0.9rem;">
-                    Masuk ke akun Anda
-                </p>
-            </header>
-
-            <form method="POST" action="{{ route('login') }}">
+    <div class="h-dvh flex items-center justify-center px-4">
+        <x-card class="max-w-sm">
+            <form action="#" method="POST" class="flex flex-col gap-4">
                 @csrf
 
-                {{-- Email --}}
-                <label for="email">
-                    Email
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="nama@example.com"
-                        value="{{ old('email') }}"
-                        required
-                        autofocus
-                    >
-                    @error('email')
-                        <small style="color: var(--del-color);">{{ $message }}</small>
-                    @enderror
-                </label>
+                <x-text as="h1" variant="h4" class="mb-4">Sign in to our platform</x-text>
 
-                {{-- Password --}}
-                <label for="password">
-                    Password
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Password anda"
-                        required
-                    >
-                    @error('password')
-                        <small style="color: var(--del-color);">{{ $message }}</small>
-                    @enderror
-                </label>
+                <x-input label="Your email" type="email" name="email" placeholder="example@company.com" required />
 
-                {{-- Submit Button --}}
-                <button type="submit" style="width: 100%; margin-top: 1rem;">
-                    Login
-                </button>
+                <x-input label="Your password" type="password" name="password" placeholder="•••••••••" required />
+
+                <x-button type="submit" class="w-full mt-4">
+                    Login to your account
+                </x-button>
             </form>
-        </article>
+        </x-card>
     </div>
 @endsection

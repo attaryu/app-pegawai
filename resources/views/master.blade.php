@@ -1,45 +1,24 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.amber.min.css">
-    <script src="https://kit.fontawesome.com/994c85c9fb.js" crossorigin="anonymous"></script>
+    @vite('resources/css/app.css')
     <title>@yield('title', 'App Pegawai')</title>
 </head>
 
-<body>
-    <main class="container" style="min-height: 90dvh;">
-        <nav>
-            <p style="font-size: 1.2rem;">
-                <strong>@yield('nav-title', 'App Pegawai')</strong>
-            </p>
-
-            <ul style="font-size:0.9rem">
-                <li><a href="{{ route('index') }}">Beranda</a></li>
-                <li><a href="{{ route('employees.index') }}">Karyawan</a></li>
-                <li><a href="{{ route('departments.index') }}">Departemen</a></li>
-                <li><a href="{{ route('positions.index') }}">Posisi</a></li>
-                <li><a href="{{ route('attendances.index') }}">Kehadiran</a></li>
-                <li><a href="{{ route('salaries.index') }}">Gaji</a></li>
-            </ul>
-        </nav>
+<body class="bg-white dark:bg-gray-900">
+    <main>
+        <x-navbar />
 
         @yield('content')
     </main>
 
-    <footer style="display: flex; align-items: center; justify-content: center; gap: 2rem;">
-        <p style="color: var(--muted-color); margin-bottom: 1rem;">
-            <i class="fa-solid fa-graduation-cap" style="margin-right: 0.5rem;"></i>
-            Dikembangkan sebagai bagian dari pembelajaran
-        </p>
+    <x-footer />
 
-        <p style="color: var(--muted-color); font-size: 0.9rem;">
-            <strong>TEKNIK INFORMATIKA - PENS 2025</strong>
-        </p>
-    </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script src="https://kit.fontawesome.com/994c85c9fb.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
         </script>
