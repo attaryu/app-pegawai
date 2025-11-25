@@ -1,7 +1,7 @@
-@props(['variant' => 'default', 'type' => 'button', 'class' => ''])
+@props(['variant' => 'default', 'type' => 'button', 'href' => null, 'class' => ''])
 
 @php
-    $baseClasses = 'box-border font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none shadow-xs';
+    $baseClasses = 'inline-block box-border font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none shadow-xs text-center';
 
     $variantClasses = [
         'default' => 'text-white bg-brand border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium',
@@ -18,6 +18,12 @@
     $finalClass = trim("$baseClasses $variantClass $class");
 @endphp
 
-<button {{ $attributes->merge(['type' => $type, 'class' => $finalClass]) }}>
-    {{ $slot }}
-</button>
+@if($href)
+    <a {{ $attributes->merge(['href' => $href, 'class' => $finalClass]) }}>
+        {{ $slot }}
+    </a>
+@else
+    <button {{ $attributes->merge(['type' => $type, 'class' => $finalClass]) }}>
+        {{ $slot }}
+    </button>
+@endif

@@ -11,13 +11,9 @@
         </x-text>
 
         <div class="flex items-center justify-center gap-2 mt-6">
-            <x-button variant="primary" class="mr-2" onclick="window.location='{{ route('login') }}'">
-                Get Started
+            <x-button href="{{ route('dashboard.index') }}" variant="primary" class="mr-2">
+                Dashboard
             </x-button>
-
-            <x-text as="small" class="ml-2">
-                No credit card required!
-            </x-text>
         </div>
     </section>
 @endsection
