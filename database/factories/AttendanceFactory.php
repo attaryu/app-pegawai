@@ -24,7 +24,7 @@ class AttendanceFactory extends Factory
             $keluar = fake()->dateTimeBetween('16:00:00', '18:00:00');
 
             return [
-                'tanggal' => fake()->dateTimeBetween('-2 year'),
+                'tanggal' => fake()->dateTimeBetween('-1 year', 'now'),
                 'status' => $status,
                 'waktu_masuk' => $masuk->format('H:i'),
                 'waktu_keluar' => $keluar->format('H:i'),
@@ -32,7 +32,7 @@ class AttendanceFactory extends Factory
         }
 
         return [
-            'tanggal' => fake()->dateTimeBetween('-2 year'),
+            'tanggal' => fake()->dateTimeBetween('-1 year', 'now'),
             'status' => $status,
             'waktu_masuk' => null,
             'waktu_keluar' => null,

@@ -1,7 +1,7 @@
 @aware(['routeName', 'id'])
 @props(['updateRouteName', 'id'])
 
-<a role="button" href="{{ route($updateRouteName ?? $routeName . '.edit', $id) }}"
-    style="padding: 4px; width: 40px; height: 40px;">
-    <i class="fa-solid fa-sm fa-pen-to-square"></i>
-</a>
+<x-button href="{{ route($updateRouteName ?? $routeName . '.edit', $id) }}"
+    variant="tertiary" :isIcon="true">
+    <i class="fa-solid fa-pen-to-square"></i>
+</x-button>

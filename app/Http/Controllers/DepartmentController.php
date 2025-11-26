@@ -17,7 +17,7 @@ class DepartmentController extends Controller
             ->latest()
             ->paginate(20);
 
-        return view('departments.index', compact('departments'));
+        return view('pages.departments.index', compact('departments'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('departments.create');
+        return view('pages.departments.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class DepartmentController extends Controller
 
         Department::create($request->all());
 
-        return redirect()->route('departments.index');
+        return redirect()->route('dashboard.admin.departments.index');
     }
 
     /**
@@ -49,7 +49,7 @@ class DepartmentController extends Controller
     {
         $department = Department::with('employees')->find($id);
 
-        return view('departments.show', compact('department'));
+        return view('pages.departments.show', compact('department'));
     }
 
     /**
@@ -59,7 +59,7 @@ class DepartmentController extends Controller
     {
         $department = Department::find($id);
 
-        return view('departments.edit', compact('department'));
+        return view('pages.departments.edit', compact('department'));
     }
 
     /**
@@ -74,7 +74,7 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         $department->update($request->all());
 
-        return redirect()->route('departments.index');
+        return redirect()->route('dashboard.admin.departments.index');
     }
 
     /**
@@ -85,6 +85,6 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         $department->delete();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('dashboard.admin.departments.index');
     }
 }

@@ -1,29 +1,40 @@
 @props(['paginator'])
 
-<div style="display: flex; align-items: center; gap: 0.5rem">
-    <p style="height: fit-content; margin: 0">Halaman {{ $paginator->currentPage() }} dari {{ $paginator->lastPage() }}
-    </p>
+<div class="flex items-center gap-4">
+    <x-text as="p" style="height: fit-content; margin: 0">Halaman {{ $paginator->currentPage() }} dari
+        {{ $paginator->lastPage() }}
+    </x-text>
 
-    <a role="button" href="{{ $paginator->previousPageUrl() }}"
-        style="height: 48px; width: 48px; padding: 0; display: grid; place-items: center">
-        <i class="fa-solid fa-chevron-left"></i>
-    </a>
+    <div class="flex items-center gap-2">
+        <x-button variant="secondary" href="{{ $paginator->previousPageUrl() }}" :isIcon="true" size="lg">
+            <i class="fa-solid fa-chevron-left"></i>
+        </x-button>
 
-    <details class="dropdown" style="margin: 0">
-        <summary style="height: fit-content; padding: 8px 12px">Page {{ $paginator->currentPage() }}</summary>
 
-        <ul style="max-height: 60dvh; overflow-y: auto;">
-            @for ($page = 1; $page <= $paginator->lastPage(); $page++)
-                <li>
-                    <a href="{{ $paginator->url($page) }}">
-                        {{ $page }}
-                    </a>
-                </li>
-            @endfor
-            </ul> </details>
+        <x-button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" variant="secondary"
+            class="flex items-center gap-10">
+            Page {{ $paginator->currentPage() }}
 
-            <a role="button" href="{{ $paginator->nextPageUrl() }}"
-                style="height: 48px; width: 48px; padding: 0; display: grid; place-items: center">
-                <i class="fa-solid fa-chevron-right"></i>
-            </a>
+            <i class="fa-solid fa-chevron-down ml-2"></i>
+        </x-button>
+
+        <x-button variant="secondary" href="{{ $paginator->nextPageUrl() }}" :isIcon="true" size="lg">
+            <i class="fa-solid fa-chevron-right"></i>
+        </x-button>
+    </div>
+</div>
+
+{{-- Dropdown menu --}}
+<div id="dropdown"
+    class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
+    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
+        @for ($page = 1; $page <= $paginator->lastPage(); $page++)
+            <li>
+                <a href="{{ $paginator->url($page) }}"
+                    class="block px-4 py-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded text-body">
+                    {{ $page }}
+                </a>
+            </li>
+        @endfor
+    </ul>
 </div>

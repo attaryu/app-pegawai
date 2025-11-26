@@ -1,7 +1,5 @@
 @props(['routeName', 'id'])
 
-<td>
-    <div style="display: flex; align-items: center; gap: 0.5rem">
-        {{ $slot }}
-    </div>
-</td>
+<div class="flex items-center gap-2">
+    {{ $slot }}
+</div>

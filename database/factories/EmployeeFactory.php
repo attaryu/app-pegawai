@@ -24,7 +24,7 @@ class EmployeeFactory extends Factory
             'nomor_telepon' => fake()->phoneNumber(),
             'tanggal_lahir' => fake()->dateTimeBetween('-40 years', '-18 years'),
             'alamat' => fake()->address(),
-            'tanggal_masuk' => fake()->dateTimeBetween('-5 years'),
+            'tanggal_masuk' => fake()->dateTimeBetween('-1 years', 'now'),
             'status' => fake()->randomElement(['aktif', 'nonaktif']),
         ];
     }

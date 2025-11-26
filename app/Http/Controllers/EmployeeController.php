@@ -16,7 +16,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::with(['department', 'position'])->latest()->paginate(10);
 
-        return view('employees.index', compact('employees'));
+        return view('pages.employees.index', compact('employees'));
     }
 
     /**
@@ -27,7 +27,7 @@ class EmployeeController extends Controller
         $departments = Department::select('id', 'nama_departemen')->get();
         $positions = Position::select('id', 'nama_jabatan')->get();
 
-        return view('employees.create', compact('departments', 'positions'));
+        return view('pages.employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -59,7 +59,7 @@ class EmployeeController extends Controller
             'jabatan_id',
         ]));
 
-        return redirect()->route('employees.index');
+        return redirect()->route('dashboard.admin.employees.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with(['department', 'position', 'attendance', 'salaries'])->find($id);
 
-        return view('employees.show', compact('employee'));
+        return view('pages.employees.show', compact('employee'));
     }
 
     /**
@@ -81,7 +81,7 @@ class EmployeeController extends Controller
         $departments = Department::select('id', 'nama_departemen')->get();
         $positions = Position::select('id', 'nama_jabatan')->get();
 
-        return view('employees.edit', compact('employee', 'departments', 'positions'));
+        return view('pages.employees.edit', compact('employee', 'departments', 'positions'));
     }
 
     /**
@@ -114,7 +114,7 @@ class EmployeeController extends Controller
             'jabatan_id',
         ]));
 
-        return redirect()->route('employees.index');
+        return redirect()->route('dashboard.admin.employees.index');
     }
 
     /**
@@ -125,6 +125,6 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $employee->delete();
 
-        return redirect()->route('employees.index');
+        return redirect()->route('dashboard.admin.employees.index');
     }
 }
