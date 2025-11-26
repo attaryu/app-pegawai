@@ -1,3 +1,5 @@
+@props(['isDashboard' => false])
+
 @php
     $user = auth()->user();
     $employee = $user?->employee;
@@ -13,10 +15,26 @@
 
 <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
     <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-        {{-- name and logo --}}
-        <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">AllStaff</span>
-        </a>
+        <div class="flex items-center space-x-3 rtl:space-x-reverse">
+            {{-- sidebar toggle button --}}
+            @if ($isDashboard)
+                <button data-drawer-target="top-bar-sidebar" data-drawer-toggle="top-bar-sidebar"
+                    aria-controls="top-bar-sidebar" type="button"
+                    class="sm:hidden text-heading bg-transparent box-border border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm p-2 focus:outline-none">
+                    <span class="sr-only">Open sidebar</span>
+
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h10" />
+                    </svg>
+                </button>
+            @endif
+
+            {{-- name and logo --}}
+            <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">AllStaff</span>
+            </a>
+        </div>
 
         {{-- User menu --}}
         @auth
@@ -54,8 +72,9 @@
                                 @csrf
 
                                 <button type="submit"
-                                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded text-start">Sign
-                                    out</button>
+                                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded text-start">
+                                    Sign out
+                                </button>
                             </form>
                         </li>
                     </ul>
@@ -95,19 +114,21 @@
         @endguest
 
         {{-- navbar link --}}
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-            <ul
-                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
-                <li>
-                    <a href="{{ route('index') }}"
-                        class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
-                        aria-current="page">Home</a>
-                </li>
-                <li>
-                    <a href="{{ route('dashboard.index') }}"
-                        class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Dashboard</a>
-                </li>
-            </ul>
-        </div>
+        @if (!$isDashboard)
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+                <ul
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
+                    <li>
+                        <a href="{{ route('index') }}"
+                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
+                            aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard.index') }}"
+                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        @endif
     </div>
 </nav>

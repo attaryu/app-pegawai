@@ -8,6 +8,7 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 @source "../../node_modules/flowbite";
+@source "../../node_modules/flowbite-datepicker";
 
 /* enable dark mode */
 @custom-variant dark (&:where(.dark, .dark *));

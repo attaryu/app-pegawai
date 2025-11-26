@@ -15,7 +15,7 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::with('employee')->latest()->paginate(10);
 
-        return view('attendances.index', compact('attendances'));
+        return view('pages.attendances.index', compact('attendances'));
     }
 
     /**
@@ -25,7 +25,7 @@ class AttendanceController extends Controller
     {
         $employees = Employee::all();
 
-        return view('attendances.create', compact('employees'));
+        return view('pages.attendances.create', compact('employees'));
     }
 
     /**
@@ -57,7 +57,7 @@ class AttendanceController extends Controller
             'status',
         ]));
 
-        return redirect()->route('attendances.index');
+        return redirect()->route('dashboard.admin.attendances.index');
     }
 
     /**
@@ -68,7 +68,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::find($id);
         $employees = Employee::all();
 
-        return view('attendances.edit', compact('attendance', 'employees'));
+        return view('pages.attendances.edit', compact('attendance', 'employees'));
     }
 
     /**
@@ -100,7 +100,7 @@ class AttendanceController extends Controller
             'status',
         ]));
 
-        return redirect()->route('attendances.index');
+        return redirect()->route('dashboard.admin.attendances.index');
     }
 
     /**
@@ -111,6 +111,6 @@ class AttendanceController extends Controller
         $attendance = Attendance::find($id);
         $attendance->delete();
 
-        return redirect()->route('attendances.index');
+        return redirect()->route('dashboard.admin.attendances.index');
     }
 }

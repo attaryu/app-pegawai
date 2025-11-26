@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.main')
 
 @section('title', 'Login - App Pegawai')
 

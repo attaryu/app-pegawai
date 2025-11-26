@@ -15,7 +15,7 @@ class SalaryController extends Controller
     {
         $salaries = Salary::with('employee')->paginate(10);
 
-        return view('salaries.index', compact('salaries'));
+        return view('pages.salaries.index', compact('salaries'));
     }
 
     /**
@@ -25,7 +25,7 @@ class SalaryController extends Controller
     {
         $employees = Employee::with('position')->get();
 
-        return view('salaries.create', compact('employees'));
+        return view('pages.salaries.create', compact('employees'));
     }
 
     /**
@@ -54,7 +54,7 @@ class SalaryController extends Controller
             'total_gaji',
         ]));
 
-        return redirect()->route('salaries.index');
+        return redirect()->route('dashboard.admin.salaries.index');
     }
 
 
@@ -66,7 +66,7 @@ class SalaryController extends Controller
         $employees = Employee::with('position')->get();
         $salary = Salary::with('employee')->find($salary->id);
 
-        return view('salaries.edit', compact('salary', 'employees'));
+        return view('pages.salaries.edit', compact('salary', 'employees'));
     }
 
     /**
@@ -95,7 +95,7 @@ class SalaryController extends Controller
             'total_gaji',
         ]));
 
-        return redirect()->route('salaries.index');
+        return redirect()->route('dashboard.admin.salaries.index');
     }
 
     /**
@@ -104,6 +104,6 @@ class SalaryController extends Controller
     public function destroy(Salary $salary)
     {
         $salary->delete();
-        return redirect()->route('salaries.index');
+        return redirect()->route('dashboard.admin.salaries.index');
     }
 }
