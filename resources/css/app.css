@@ -12,3 +12,9 @@
 
 /* enable dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+    .debug {
+        @apply outline outline-red-500;
+    }
+}

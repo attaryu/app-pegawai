@@ -17,6 +17,6 @@
     $finalClass = trim("$baseClasses $variantClass $class");
 @endphp
 
-<span {{ $attributes->merge(['class' => $finalClass]) }}>
+<span {{ $attributes->twMerge([$finalClass]) }}>
     {{ $slot }}
 </span>

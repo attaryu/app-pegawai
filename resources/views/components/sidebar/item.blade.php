@@ -1,7 +1,14 @@
-@props(['icon' => null, 'href' => null, 'class' => ''])
+@props(['icon' => null, 'href' => null, 'route' => null, 'class' => ''])
 
 @php
-    $finalClass = "flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group $class";
+    $isActive = $route ? request()->routeIs($route) : false;
+
+    $baseClass = "flex items-center px-2 py-1.5 rounded-base group transition-colors";
+    $activeClass = $isActive
+        ? "bg-neutral-tertiary text-fg-brand"
+        : "text-body hover:bg-neutral-tertiary hover:text-fg-brand";
+
+    $finalClass = "$baseClass $activeClass $class";
 @endphp
 
 <li>

@@ -12,28 +12,28 @@
         </a>
 
         <ul class="space-y-2 font-medium mt-10">
-            <x-sidebar.item href="{{ route('dashboard.index') }}" icon="fa-solid fa-table-columns">
+            <x-sidebar.item href="{{ route('dashboard.index') }}" route="dashboard.index" icon="fa-solid fa-table-columns">
                 Dashboard
             </x-sidebar.item>
 
             @if($role === 'admin')
-                <x-sidebar.item href="{{ route('dashboard.admin.employees.index') }}" icon="fa-solid fa-address-card">
+                <x-sidebar.item href="{{ route('dashboard.admin.employees.index') }}" route="dashboard.admin.employees.*" icon="fa-solid fa-address-card">
                     Employees
                 </x-sidebar.item>
 
-                <x-sidebar.item href="{{ route('dashboard.admin.departments.index') }}" icon="fa-solid fa-building">
+                <x-sidebar.item href="{{ route('dashboard.admin.departments.index') }}" route="dashboard.admin.departments.*" icon="fa-solid fa-building">
                     Departments
                 </x-sidebar.item>
 
-                <x-sidebar.item href="{{ route('dashboard.admin.positions.index') }}" icon="fa-solid fa-briefcase">
+                <x-sidebar.item href="{{ route('dashboard.admin.positions.index') }}" route="dashboard.admin.positions.*" icon="fa-solid fa-briefcase">
                     Positions
                 </x-sidebar.item>
 
-                <x-sidebar.item href="{{ route('dashboard.admin.salaries.index') }}" icon="fa-solid fa-sack-dollar">
+                <x-sidebar.item href="{{ route('dashboard.admin.salaries.index') }}" route="dashboard.admin.salaries.*" icon="fa-solid fa-sack-dollar">
                     Salaries
                 </x-sidebar.item>
 
-                <x-sidebar.item href="{{ route('dashboard.admin.attendances.index') }}"
+                <x-sidebar.item href="{{ route('dashboard.admin.attendances.index') }}" route="dashboard.admin.attendances.*"
                     icon="fa-solid fa-clipboard-user">
                     Attendances
                 </x-sidebar.item>
