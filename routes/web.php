@@ -23,4 +23,10 @@ Route::prefix('/dashboard')
             Route::resource('attendances', AttendanceController::class)->except(['show']);
             Route::resource('salaries', SalaryController::class)->except(['show']);
         });
+
+        Route::middleware('role:employee')->name('employee.')->group(function() {
+            Route::get('/statistic', [EmployeeController::class, 'statistic'])->name('statistic');
+            Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn'])->name('attendance.checkin');
+            Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkout');
+        });
     });
