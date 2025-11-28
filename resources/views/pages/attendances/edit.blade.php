@@ -1,5 +1,5 @@
 @php
-    $format = fn (string $date) => date_format(date_create($date), 'H:i');
+    $format = fn(string $date) => date_format(date_create($date), 'H:i');
 @endphp
 
 @extends('layouts.dashboard')
@@ -9,7 +9,8 @@
     <x-card>
         <x-header title="Edit Data Kehadiran" />
 
-        <form action="{{ route('dashboard.admin.attendances.update', $attendance->id) }}" method="POST" class="mt-8 space-y-6">
+        <form action="{{ route('dashboard.admin.attendances.update', $attendance->id) }}" method="POST"
+            class="mt-8 space-y-6">
             @csrf
             @method('PUT')
 
@@ -22,20 +23,24 @@
                         @endforeach
                     </x-select>
 
-                    <x-select id="status" name="status" error="{{ $errors->first('status') }}"
-                        label="Status" :options="['Hadir' => 'Hadir', 'Izin' => 'Izin', 'Sakit' => 'Sakit', 'Alpha' => 'Alpha']"
+                    <x-select id="status" name="status" error="{{ $errors->first('status') }}" label="Status"
+                        :options="['hadir' => 'Hadir', 'izin' => 'Izin', 'sakit' => 'Sakit', 'alpha' => 'Alpha']"
                         value="{{ old('status', $attendance->status) }}" class="w-full" />
                 </div>
 
                 <div class="flex gap-4 w-full">
                     <x-input id="waktu_masuk" name="waktu_masuk" error="{{ $errors->first('waktu_masuk') }}"
-                        label="Waktu Masuk" type="time" value="{{ old('waktu_masuk', $format($attendance->waktu_masuk)) }}" class="w-full" />
+                        label="Waktu Masuk" type="time"
+                        value="{{ old('waktu_masuk', $attendance->waktu_masuk ? $format($attendance->waktu_masuk) : '') }}"
+                        class="w-full" />
 
                     <x-input id="waktu_keluar" name="waktu_keluar" error="{{ $errors->first('waktu_keluar') }}"
-                        label="Waktu Keluar" type="time" value="{{ old('waktu_keluar', $format($attendance->waktu_keluar)) }}" class="w-full" />
+                        label="Waktu Keluar" type="time"
+                        value="{{ old('waktu_keluar', $attendance->waktu_keluar ? $format($attendance->waktu_keluar) : '') }}"
+                        class="w-full" />
 
-                    <x-input id="tanggal" name="tanggal" error="{{ $errors->first('tanggal') }}"
-                        label="Tanggal" type="date" value="{{ old('tanggal', $attendance->tanggal) }}" class="w-full" />
+                    <x-input id="tanggal" name="tanggal" error="{{ $errors->first('tanggal') }}" label="Tanggal" type="date"
+                        value="{{ old('tanggal', $attendance->tanggal) }}" class="w-full" />
                 </div>
             </fieldset>
 

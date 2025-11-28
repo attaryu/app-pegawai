@@ -1,5 +1,4 @@
 @extends('layouts.main')
-@section('title', 'App Pegawai - Dashboard')
 
 @section('content')
     <section class="w-full h-dvh flex items-center justify-center gap-2 flex-col px-4 text-center bg-neutral-primary">

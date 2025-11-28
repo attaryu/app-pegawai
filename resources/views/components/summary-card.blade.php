@@ -5,7 +5,11 @@
     'icon' => 'fa-users',
 ])
 
-<x-card class="hover:shadow-lg transition-shadow flex flex-col gap-2">
+@php
+    $id = 'tooltip-' . Str::slug($label);
+@endphp
+
+<x-card class="hover:shadow-lg transition-shadow flex flex-col gap-2" data-tooltip-target="{{ $id }}">
     <x-text as="small" class="text-body-secondary">{{ $label }}</x-text>
 
     <div class="flex items-center justify-between">
@@ -20,3 +24,7 @@
         </x-text>
     @endif
 </x-card>
+
+<x-tooltip id="{{ $id }}">
+    {{ $label }}: {{ $highlight }}
+</x-tooltip>

@@ -6,7 +6,7 @@
 @section('title', 'Attendances')
 
 @section('content')
-    <x-header title="Attendances" :paginator="$attendances" create-route-name="dashboard.admin.attendances.create" />
+    <x-header title="Attendances" :paginator="$attendances"/>
 
     <x-table.table class="mt-8">
         <x-table.head>
