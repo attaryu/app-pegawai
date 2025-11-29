@@ -17,7 +17,7 @@
                 Dashboard
             </x-sidebar.item>
 
-            @if($role === 'admin')
+            @can('is-admin')
                 <x-sidebar.item href="{{ route('dashboard.admin.employees.index') }}" route="dashboard.admin.employees.*"
                     icon="fa-solid fa-address-card">
                     Employees
@@ -42,9 +42,14 @@
                     route="dashboard.admin.attendances.*" icon="fa-solid fa-clipboard-user">
                     Attendances
                 </x-sidebar.item>
-            @endif
+            @endcan
 
-            @if ($role == 'employee')
+            @can('is-employee')
+                <x-sidebar.item href="{{ route('dashboard.employee.leave.index') }}" route="dashboard.employee.leave.*"
+                    icon="fa-solid fa-umbrella-beach">
+                    Leave
+                </x-sidebar.item>
+
                 <x-sidebar.item href="{{ route('dashboard.employee.statistic') }}" route="dashboard.employee.statistic.*"
                     icon="fa-solid fa-chart-line">
                     Statistic
@@ -54,7 +59,7 @@
                     route="dashboard.employee.attendances.history" icon="fa-solid fa-clipboard-user">
                     Attendance History
                 </x-sidebar.item>
-            @endif
+            @endcan
         </ul>
     </div>
 </aside>

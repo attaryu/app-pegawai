@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\Employee\LeaveController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,12 @@ Route::prefix('/dashboard')
                 Route::get('/history', [AttendanceController::class, 'history'])->name('history');
                 Route::post('/check-in', [AttendanceController::class, 'checkIn'])->name('checkin');
                 Route::post('/check-out', [AttendanceController::class, 'checkOut'])->name('checkout');
+            });
+
+            Route::prefix('/leave')->name('leave.')->group(function() {
+                Route::get('/', [LeaveController::class, 'index'])->name('index');
+                Route::get('/request', [LeaveController::class, 'create'])->name('create');
+                Route::post('/request', [LeaveController::class, 'store'])->name('store');
             });
         });
     });

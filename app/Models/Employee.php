@@ -45,4 +45,14 @@ class Employee extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function leaveBalance()
+    {
+        return $this->hasOne(EmployeeLeaveBalance::class, 'employee_id');
+    }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'employee_id');
+    }
 }
