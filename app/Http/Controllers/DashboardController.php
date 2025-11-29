@@ -108,23 +108,27 @@ class DashboardController extends Controller
 
     private function employee(Employee $employee)
     {
+        $now = now();
+
         // Cek kehadiran hari ini
         $todayAttendance = Attendance::where('karyawan_id', $employee->id)
-            ->whereDate('tanggal', today())
+            ->whereDate('tanggal', $now->today())
             ->first();
 
         // Validasi waktu check in (7-9 pagi, hari kerja)
-        $currentHour = now()->hour;
-        $isWeekday = now()->isWeekday();
+        $currentHour = $now->hour;
+        $isWeekday = $now->isWeekday();
         $canCheckIn = $isWeekday && $currentHour >= 7 && $currentHour < 9 && !$todayAttendance;
 
-        // Validasi check out (maksimal 12 jam setelah check in)
         $canCheckOut = false;
 
+        // Validasi check out (maksimal 12 jam setelah check in dan di hari yang sama)
         if ($todayAttendance && $todayAttendance->waktu_masuk && !$todayAttendance->waktu_keluar) {
             $checkInTime = \Carbon\Carbon::parse($todayAttendance->tanggal . ' ' . $todayAttendance->waktu_masuk);
             $maxCheckOutTime = $checkInTime->copy()->addHours(12);
-            $canCheckOut = now()->between($checkInTime, $maxCheckOutTime);
+            $endOfDay = $now->copy()->endOfDay();
+
+            $canCheckOut = $now->between($checkInTime, $maxCheckOutTime) && $now->lessThanOrEqualTo($endOfDay);
         }
 
         return view('pages.dashboard.index', [

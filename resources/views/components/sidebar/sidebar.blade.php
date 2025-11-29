@@ -44,12 +44,17 @@
                 </x-sidebar.item>
             @endif
 
-                @if ($role == 'employee')
-                    <x-sidebar.item href="{{ route('dashboard.employee.statistic') }}"
-                        route="dashboard.employee.statistic.*" icon="fa-solid fa-chart-line">
-                        Statistic
-                    </x-sidebar.item>
-                @endif
+            @if ($role == 'employee')
+                <x-sidebar.item href="{{ route('dashboard.employee.statistic') }}" route="dashboard.employee.statistic.*"
+                    icon="fa-solid fa-chart-line">
+                    Statistic
+                </x-sidebar.item>
+
+                <x-sidebar.item href="{{ route('dashboard.employee.attendances.history') }}"
+                    route="dashboard.employee.attendances.history" icon="fa-solid fa-clipboard-user">
+                    Attendance History
+                </x-sidebar.item>
+            @endif
         </ul>
     </div>
 </aside>

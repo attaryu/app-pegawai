@@ -4,15 +4,19 @@
         <div class="w-20 h-20 bg-brand-primary/10 rounded-full flex items-center justify-center">
             <i class="fa-solid fa-user text-4xl text-body"></i>
         </div>
+
         <div class="flex-1">
             <x-text as="h3" variant="h4">{{ $employee->nama_lengkap }}</x-text>
+
             <x-text as="p" class="text-body-secondary mt-1">
                 {{ $employee->position->nama_jabatan }} • {{ $employee->department->nama_departemen }}
             </x-text>
+
             <div class="flex gap-4 mt-2">
                 <x-badge :variant="$employee->status === 'aktif' ? 'success' : 'danger'">
                     {{ ucfirst($employee->status) }}
                 </x-badge>
+
                 <x-text as="small" class="text-body-secondary">
                     <i class="fa-solid fa-calendar"></i>
                     Joined {{ date('d M Y', strtotime($employee->tanggal_masuk)) }}
@@ -55,7 +59,7 @@
 
         <div class="flex gap-3">
             @if($canCheckIn)
-                <form action="{{ route('dashboard.employee.attendance.checkin') }}" method="POST">
+                <form action="{{ route('dashboard.employee.attendances.checkin') }}" method="POST">
                     @csrf
                     <x-button type="submit" variant="success">
                         <i class="fa-solid fa-right-to-bracket"></i>
@@ -63,7 +67,7 @@
                     </x-button>
                 </form>
             @elseif($canCheckOut)
-                <form action="{{ route('dashboard.employee.attendance.checkout') }}" method="POST">
+                <form action="{{ route('dashboard.employee.attendances.checkout') }}" method="POST">
                     @csrf
                     <x-button type="submit" variant="danger">
                         <i class="fa-solid fa-right-from-bracket"></i>
@@ -83,7 +87,7 @@
                         Weekend
                     @else
                         <i class="fa-solid fa-lock"></i>
-                        Not Available (7-9 AM)
+                        Not Available (Only 7-9 AM)
                     @endif
                 </x-button>
             @endif

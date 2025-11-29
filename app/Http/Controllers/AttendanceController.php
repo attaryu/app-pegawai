@@ -114,6 +114,24 @@ class AttendanceController extends Controller
         return redirect()->route('dashboard.admin.attendances.index');
     }
 
+    public function history(Request $request)
+    {
+        $employee = $request->user()->employee;
+
+        if (!$employee) {
+            return back()->with('error', 'Employee data not found');
+        }
+
+        $attendances = Attendance::where('karyawan_id', $employee->id)
+            ->orderBy('tanggal', 'desc')
+            ->paginate(10);
+
+        return view('pages.employee.attendance.history', [
+            'attendances' => $attendances,
+            'employee' => $employee,
+        ]);
+    }
+
     /**
      * Employee check in
      */
@@ -152,7 +170,7 @@ class AttendanceController extends Controller
             'tanggal' => today(),
             'waktu_masuk' => now()->format('H:i:s'),
             'waktu_keluar' => null,
-            'status' => 'hadir'
+            'status' => 'present'
         ]);
 
         return back()->with('success', 'Check in successful');

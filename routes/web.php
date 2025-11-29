@@ -26,7 +26,11 @@ Route::prefix('/dashboard')
 
         Route::middleware('role:employee')->name('employee.')->group(function() {
             Route::get('/statistic', [EmployeeController::class, 'statistic'])->name('statistic');
-            Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn'])->name('attendance.checkin');
-            Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkout');
+
+            Route::prefix('/attendances')->name('attendances.')->group(function() {
+                Route::get('/history', [AttendanceController::class, 'history'])->name('history');
+                Route::post('/check-in', [AttendanceController::class, 'checkIn'])->name('checkin');
+                Route::post('/check-out', [AttendanceController::class, 'checkOut'])->name('checkout');
+            });
         });
     });
