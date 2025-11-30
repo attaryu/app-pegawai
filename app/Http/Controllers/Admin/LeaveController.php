@@ -54,7 +54,7 @@ class LeaveController extends Controller
                         ->toDateString(),
                 ],
                 [
-                    'status' => $leaveRequest->leave_type === 'sick' ? 'sakit' : 'izin',
+                    'status' => 'leave',
                     'waktu_masuk' => null,
                     'waktu_keluar' => null,
                 ]
