@@ -87,6 +87,25 @@ class LeaveController extends Controller
         $endDate = \Carbon\Carbon::parse($validated['end_date']);
         $daysRequested = $startDate->diffInDays($endDate) + 1;
 
+        // Check for overlapping leave requests
+        $existingLeave = LeaveRequest::where('employee_id', $employee->id)
+            ->whereIn('status', ['pending', 'approved'])
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($q) use ($startDate, $endDate) {
+                        $q->where('start_date', '<=', $startDate)
+                          ->where('end_date', '>=', $endDate);
+                    });
+            })
+            ->exists();
+
+        if ($existingLeave) {
+            return back()
+                ->withInput()
+                ->with('error', 'You already have a leave request for the selected date range');
+        }
+
         // Check leave balance
         $leaveBalance = EmployeeLeaveBalance::where('employee_id', $employee->id)->first();
 
