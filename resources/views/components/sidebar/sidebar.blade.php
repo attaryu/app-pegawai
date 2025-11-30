@@ -11,11 +11,15 @@
             <span class="self-center text-lg text-heading font-semibold whitespace-nowrap">AllStaff</span>
         </a>
 
-        <ul class="space-y-2 font-medium mt-10">
+        <ul class="flex flex-col gap-2 font-medium mt-10">
             <x-sidebar.item href="{{ route('dashboard.index') }}" route="dashboard.index"
                 icon="fa-solid fa-table-columns">
                 Dashboard
             </x-sidebar.item>
+        </ul>
+
+        <ul class="flex flex-col gap-2 font-medium mt-5">
+            <x-text as="small" class="mb-1">Employee</x-text>
 
             @can('is-admin')
                 <x-sidebar.item href="{{ route('dashboard.admin.employees.index') }}" route="dashboard.admin.employees.*"
@@ -23,7 +27,13 @@
                     Employees
                 </x-sidebar.item>
 
-                <x-sidebar.item href="{{ route('dashboard.admin.departments.index') }}"
+
+                <x-sidebar.item href="{{ route('dashboard.admin.leave-requests.index') }}"
+                    route="dashboard.admin.leave-requests.*" icon="fa-solid fa-umbrella-beach   ">
+                    Leave Requests
+                </x-sidebar.item>
+
+                {{-- <x-sidebar.item href="{{ route('dashboard.admin.departments.index') }}"
                     route="dashboard.admin.departments.*" icon="fa-solid fa-building">
                     Departments
                 </x-sidebar.item>
@@ -41,7 +51,7 @@
                 <x-sidebar.item href="{{ route('dashboard.admin.attendances.index') }}"
                     route="dashboard.admin.attendances.*" icon="fa-solid fa-clipboard-user">
                     Attendances
-                </x-sidebar.item>
+                </x-sidebar.item> --}}
             @endcan
 
             @can('is-employee')

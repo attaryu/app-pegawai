@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('days_requested');
             $table->enum('leave_type', ['annual', 'sick', 'personal']);
             $table->text('reason')->nullable();
+            $table->text('rejection_reason')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected', 'cancelled'])
                 ->default('pending');
             $table->timestamps();

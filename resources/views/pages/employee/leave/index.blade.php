@@ -100,11 +100,11 @@
                 <x-table>
                     <x-table.head>
                         <x-table.heading>Type</x-table.heading>
-                        <x-table.heading>Start Date</x-table.heading>
-                        <x-table.heading>End Date</x-table.heading>
+                        <x-table.heading>Date Range</x-table.heading>
                         <x-table.heading>Days</x-table.heading>
                         <x-table.heading>Reason</x-table.heading>
                         <x-table.heading>Status</x-table.heading>
+                        <x-table.heading>Rejection Reason</x-table.heading>
                         <x-table.heading>Requested At</x-table.heading>
                         <x-table.heading>Action</x-table.heading>
                     </x-table.head>
@@ -132,8 +132,14 @@
                                     </div>
                                 </x-table.cell>
 
-                                <x-table.cell>{{ date('d M Y', strtotime($request->start_date)) }}</x-table.cell>
-                                <x-table.cell>{{ date('d M Y', strtotime($request->end_date)) }}</x-table.cell>
+                                <x-table.cell>
+                                    <x-text as="small">
+                                        {{ date('d M Y', strtotime($request->start_date)) }}
+                                        <span class="text-body-secondary">to</span>
+                                        {{ date('d M Y', strtotime($request->end_date)) }}
+                                    </x-text>
+                                </x-table.cell>
+
                                 <x-table.cell>{{ $request->days_requested }} day(s)</x-table.cell>
 
                                 <x-table.cell>
@@ -156,25 +162,26 @@
                                     </x-badge>
                                 </x-table.cell>
 
+                                <x-table.cell>
+                                    {{ $request->rejection_reason ?? '-' }}
+                                </x-table.cell>
+
                                 <x-table.cell>{{ $request->created_at->diffForHumans() }}</x-table.cell>
 
                                 <x-table.cell>
-                                    @php
-                                        $isPending = $request->status === 'pending';
-                                    @endphp
+                                    @if ($request->status === 'pending')
+                                        <x-button data-modal-target="popup-modal-{{ $request->id }}"
+                                            data-modal-toggle="popup-modal-{{ $request->id }}" type="button" variant="secondary">
+                                            Cancel
+                                        </x-button>
 
-                                    <x-button data-modal-target="popup-modal-{{ $request->id }}" data-modal-toggle="popup-modal-{{ $request->id }}" type="button"
-                                        variant="{{ $isPending ? 'secondary' : 'disabled' }}">
-                                        Cancel
-                                    </x-button>
-
-                                    @if ($isPending)
                                         <div id="popup-modal-{{ $request->id }}" tabindex="-1"
                                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                             <div class="relative p-4 w-full max-w-md max-h-full">
                                                 <div
                                                     class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-                                                    <x-button type="button" variant="ghost" data-modal-hide="popup-modal-{{ $request->id }}">
+                                                    <x-button type="button" variant="ghost"
+                                                        data-modal-hide="popup-modal-{{ $request->id }}">
                                                         <span class="sr-only">Close modal</span>
                                                     </x-button>
 
@@ -204,6 +211,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @else
+                                        -
                                     @endif
                                 </x-table.cell>
                             </x-table.row>
