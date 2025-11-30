@@ -1,8 +1,8 @@
 @aware(['routeName', 'id'])
-@props(['deleteRouteName', 'id'])
+@props(['deleteRouteName', 'id', 'method' => 'DELETE'])
 
 <form action="{{ route($deleteRouteName ?? $routeName . '.destroy', $id) }}" method="POST" style="display: inline">
-    @method('DELETE')
+    @method($method)
     @csrf
 
     <x-button type="button" variant="danger" :isIcon="true" data-modal-target="delete-confirmation"

@@ -114,4 +114,36 @@ class LeaveController extends Controller
         return redirect()->route('dashboard.employee.leave.index')
             ->with('success', 'Leave request submitted successfully');
     }
+
+    public function cancel(Request $request, string $id)
+    {
+        $employee = $request->user()->employee;
+
+        if (!$employee) {
+            return redirect()->route('dashboard.index')->with('error', 'Employee data not found');
+        }
+
+        $leaveRequest = LeaveRequest::where('id', $id)
+            ->where('employee_id', $employee->id)
+            ->where('status', 'pending')
+            ->first();
+
+        if (!$leaveRequest) {
+            return redirect()->route('dashboard.employee.leave.index')
+                ->with('error', 'Leave request not found or cannot be cancelled');
+        }
+
+        // Restore leave balance
+        $leaveBalance = EmployeeLeaveBalance::where('employee_id', $employee->id)->first();
+        $balanceField = "{$leaveRequest->leave_type}_leave_balance";
+        $leaveBalance->$balanceField += $leaveRequest->days_requested;
+        $leaveBalance->save();
+
+        // Cancel leave request
+        $leaveRequest->status = 'cancelled';
+        $leaveRequest->save();
+
+        return redirect()->route('dashboard.employee.leave.index')
+            ->with('success', 'Leave request cancelled successfully');
+    }
 }

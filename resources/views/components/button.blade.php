@@ -32,6 +32,7 @@
         'warning' => 'text-white bg-warning border border-transparent hover:bg-warning-strong focus:ring-4 focus:ring-warning-medium',
         'dark' => 'text-white bg-dark border border-transparent hover:bg-dark-strong focus:ring-4 focus:ring-neutral-tertiary',
         'ghost' => 'text-heading bg-transparent border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary',
+        'disabled' => 'text-fg-disabled bg-disabled box-border border border-default-medium shadow-xs font-medium leading-5 rounded-base focus:outline-none',
     ];
 
     // Build final classes
@@ -46,7 +47,7 @@
         {{ $slot }}
     </a>
 @else
-    <button {{ $attributes->merge(['type' => $type, 'class' => $finalClass])}}>
+    <button {{ $attributes->merge(['type' => $type, 'class' => $finalClass]) }}>
         {{ $slot }}
     </button>
 @endif

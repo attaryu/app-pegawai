@@ -36,8 +36,9 @@ Route::prefix('/dashboard')
 
             Route::prefix('/leave')->name('leave.')->group(function() {
                 Route::get('/', [LeaveController::class, 'index'])->name('index');
-                Route::get('/request', [LeaveController::class, 'create'])->name('create');
-                Route::post('/request', [LeaveController::class, 'store'])->name('store');
+                Route::get('/requests', [LeaveController::class, 'create'])->name('create');
+                Route::post('/requests', [LeaveController::class, 'store'])->name('store');
+                Route::patch('/requests/{id}/cancel', [LeaveController::class, 'cancel'])->name('cancel');
             });
         });
     });

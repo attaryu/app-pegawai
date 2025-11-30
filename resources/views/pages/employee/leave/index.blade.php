@@ -91,13 +91,13 @@
                     <i class="fa-solid fa-inbox text-body text-4xl mb-2"></i>
 
                     <x-text as="p">No leave requests yet</x-text>
-                    
+
                     <x-button href="{{ route('dashboard.employee.leave.create') }}" class="mt-4">
                         Make Your First Request
                     </x-button>
                 </div>
             @else
-                <x-table.table>
+                <x-table>
                     <x-table.head>
                         <x-table.heading>Type</x-table.heading>
                         <x-table.heading>Start Date</x-table.heading>
@@ -106,7 +106,9 @@
                         <x-table.heading>Reason</x-table.heading>
                         <x-table.heading>Status</x-table.heading>
                         <x-table.heading>Requested At</x-table.heading>
+                        <x-table.heading>Action</x-table.heading>
                     </x-table.head>
+
                     <x-table.body>
                         @foreach($leaveRequests as $request)
                             <x-table.row>
@@ -124,35 +126,90 @@
                                         ];
                                     @endphp
                                     <div class="flex items-center gap-2">
-                                        <i class="fa-solid {{ $typeIcons[$request->leave_type] }} {{ $typeColors[$request->leave_type] }}"></i>
+                                        <i
+                                            class="fa-solid {{ $typeIcons[$request->leave_type] }} {{ $typeColors[$request->leave_type] }}"></i>
                                         <span>{{ ucfirst($request->leave_type) }}</span>
                                     </div>
                                 </x-table.cell>
+
                                 <x-table.cell>{{ date('d M Y', strtotime($request->start_date)) }}</x-table.cell>
                                 <x-table.cell>{{ date('d M Y', strtotime($request->end_date)) }}</x-table.cell>
                                 <x-table.cell>{{ $request->days_requested }} day(s)</x-table.cell>
+
                                 <x-table.cell>
                                     <div class="max-w-xs truncate" title="{{ $request->reason }}">
                                         {{ $request->reason }}
                                     </div>
                                 </x-table.cell>
+
                                 <x-table.cell>
                                     @php
                                         $statusVariants = [
                                             'pending' => 'warning',
                                             'approved' => 'success',
-                                            'rejected' => 'danger'
+                                            'rejected' => 'danger',
+                                            'cancelled' => 'alternative',
                                         ];
                                     @endphp
                                     <x-badge :variant="$statusVariants[$request->status]">
                                         {{ ucfirst($request->status) }}
                                     </x-badge>
                                 </x-table.cell>
+
                                 <x-table.cell>{{ $request->created_at->diffForHumans() }}</x-table.cell>
+
+                                <x-table.cell>
+                                    @php
+                                        $isPending = $request->status === 'pending';
+                                    @endphp
+
+                                    <x-button data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button"
+                                        variant="{{ $isPending ? 'secondary' : 'disabled' }}">
+                                        Cancel
+                                    </x-button>
+
+                                    @if ($isPending)
+                                        <div id="popup-modal" tabindex="-1"
+                                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                                <div
+                                                    class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
+                                                    <x-button type="button" variant="ghost" data-modal-hide="popup-modal">
+                                                        <span class="sr-only">Close modal</span>
+                                                    </x-button>
+
+                                                    <div class="p-4 md:p-5 text-center">
+                                                        <i
+                                                            class="fa-solid fa-exclamation-triangle mx-auto mb-4 text-fg-disabled text-4xl"></i>
+
+                                                        <x-text as="p" class="mb-6">Are you sure you want to cancel this leave
+                                                            request?</x-text>
+
+                                                        <div class="flex items-center space-x-4 justify-center">
+                                                            <form action="{{ route('dashboard.employee.leave.cancel', $request->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PATCH')
+
+                                                                <x-button data-modal-hide="popup-modal" type="submit" variant="danger">
+                                                                    Yes
+                                                                </x-button>
+                                                            </form>
+
+                                                            <x-button data-modal-hide="popup-modal" type="button" variant="secondary">
+                                                                No
+                                                            </x-button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </x-table.cell>
                             </x-table.row>
                         @endforeach
                     </x-table.body>
-                </x-table.table>
+                </x-table>
             @endif
         </x-card>
     </div>
