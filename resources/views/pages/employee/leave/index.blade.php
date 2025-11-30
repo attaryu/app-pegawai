@@ -163,18 +163,18 @@
                                         $isPending = $request->status === 'pending';
                                     @endphp
 
-                                    <x-button data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button"
+                                    <x-button data-modal-target="popup-modal-{{ $request->id }}" data-modal-toggle="popup-modal-{{ $request->id }}" type="button"
                                         variant="{{ $isPending ? 'secondary' : 'disabled' }}">
                                         Cancel
                                     </x-button>
 
                                     @if ($isPending)
-                                        <div id="popup-modal" tabindex="-1"
+                                        <div id="popup-modal-{{ $request->id }}" tabindex="-1"
                                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                             <div class="relative p-4 w-full max-w-md max-h-full">
                                                 <div
                                                     class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-                                                    <x-button type="button" variant="ghost" data-modal-hide="popup-modal">
+                                                    <x-button type="button" variant="ghost" data-modal-hide="popup-modal-{{ $request->id }}">
                                                         <span class="sr-only">Close modal</span>
                                                     </x-button>
 

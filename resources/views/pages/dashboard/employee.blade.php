@@ -1,4 +1,6 @@
 {{-- Employee Info --}}
+<x-text as="h1" variant="h2">Employee Dashboard</x-text>
+
 <x-card>
     <div class="flex items-center gap-6">
         <div class="w-20 h-20 bg-brand-primary/10 rounded-full flex items-center justify-center">
