@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define(
             'is-employee',
             fn($user) =>
-            $user->role->name === 'employee'
+            $user->role->name === 'employee' && $user->employee->status === 'aktif'
         );
     }
 }
