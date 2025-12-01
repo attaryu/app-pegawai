@@ -19,6 +19,7 @@ class Employee extends Model
         'status',
         'departemen_id',
         'jabatan_id',
+        'user_id',
     ];
 
     public function department()

@@ -3,7 +3,6 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Employee\LeaveController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
@@ -18,7 +17,7 @@ Route::prefix('/dashboard')
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::middleware('role:admin')->name('admin.')->group(function () {
-            Route::resource('employees', EmployeeController::class);
+            Route::resource('employees', \App\Http\Controllers\Admin\EmployeeController::class);
             Route::resource('departments', DepartmentController::class);
             Route::resource('positions', PositionController::class);
             Route::resource('attendances', AttendanceController::class)->except(['show']);
@@ -32,7 +31,7 @@ Route::prefix('/dashboard')
         });
 
         Route::middleware('role:employee')->name('employee.')->group(function () {
-            Route::get('/statistic', [EmployeeController::class, 'statistic'])->name('statistic');
+            Route::get('/statistic', [\App\Http\Controllers\Employee\EmployeeController::class, 'statistic'])->name('statistic');
 
             Route::prefix('/attendances')->name('attendances.')->group(function () {
                 Route::get('/history', [AttendanceController::class, 'history'])->name('history');

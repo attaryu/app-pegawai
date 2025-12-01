@@ -47,6 +47,9 @@
                         @endforeach
                     </x-select>
                 </div>
+
+                <x-input id="password" name="password" error="{{ $errors->first('password') }}" label="Account Password"
+                    placeholder="Enter password" type="password" class="password-input hidden" />
             </fieldset>
 
             <div class="flex gap-4">
@@ -56,3 +59,22 @@
         </form>
     </x-card>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const status = document.getElementById('status');
+            const passwordInput = document.querySelector('.password-input');
+
+            status.addEventListener('change', () => {
+                if (status.value === 'aktif') {
+                    console.log('aktif');
+                    passwordInput.classList.remove('hidden');
+                } else {
+                    console.log('nonaktif');
+                    passwordInput.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+@endpush

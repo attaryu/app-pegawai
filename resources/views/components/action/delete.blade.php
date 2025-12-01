@@ -43,7 +43,7 @@
 
                 {{-- Modal footer --}}
                 <div class="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
-                    <x-button type="submit" variant="danger" onclick="return confirm('Yakin ingin menghapus?')">
+                    <x-button type="submit" variant="danger">
                         Yes, I'm sure
                     </x-button>
                     <button data-modal-hide="delete-confirmation" type="button"
