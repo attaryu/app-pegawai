@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class DepartmentController extends Controller
             ->latest()
             ->paginate(20);
 
-        return view('pages.departments.index', compact('departments'));
+        return view('pages.admin.departments.index', compact('departments'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('pages.departments.create');
+        return view('pages.admin.departments.create');
     }
 
     /**
@@ -49,7 +50,7 @@ class DepartmentController extends Controller
     {
         $department = Department::with('employees')->find($id);
 
-        return view('pages.departments.show', compact('department'));
+        return view('pages.admin.departments.show', compact('department'));
     }
 
     /**
@@ -59,7 +60,7 @@ class DepartmentController extends Controller
     {
         $department = Department::find($id);
 
-        return view('pages.departments.edit', compact('department'));
+        return view('pages.admin.departments.edit', compact('department'));
     }
 
     /**

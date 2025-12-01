@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PositionController extends Controller
     {
         $positions = Position::withCount('employees')->latest()->paginate(10);
 
-        return view('pages.positions.index', compact('positions'));
+        return view('pages.admin.positions.index', compact('positions'));
     }
 
     /**
@@ -22,7 +23,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('pages.positions.create');
+        return view('pages.admin.positions.create');
     }
 
     /**
@@ -47,7 +48,7 @@ class PositionController extends Controller
     {
         $position = Position::with('employees.department')->find($id);
 
-        return view('pages.positions.show', compact('position'));
+        return view('pages.admin.positions.show', compact('position'));
     }
 
     /**
@@ -57,7 +58,7 @@ class PositionController extends Controller
     {
         $position = Position::find($id);
 
-        return view('pages.positions.edit', compact('position'));
+        return view('pages.admin.positions.edit', compact('position'));
     }
 
     /**
