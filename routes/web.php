@@ -13,7 +13,7 @@ Route::prefix('/dashboard')
         Route::middleware('role:admin')->name('admin.')->group(function () {
             Route::resource('employees', \App\Http\Controllers\Admin\EmployeeController::class);
             Route::resource('departments', \App\Http\Controllers\Admin\DepartmentController::class);
-            Route::resource('positions', controller: \App\Http\Controllers\Admin\PositionController::class);
+            Route::resource('positions', \App\Http\Controllers\Admin\PositionController::class);
             Route::resource('attendances', \App\Http\Controllers\Admin\AttendanceController::class)->except(['show']);
             Route::resource('salaries', \App\Http\Controllers\SalaryController::class)->except(['show']);
 
@@ -34,7 +34,7 @@ Route::prefix('/dashboard')
                 ->name('attendances.')
                 ->controller(\App\Http\Controllers\Employee\AttendanceController::class)
                 ->group(function () {
-                    Route::get('/history', 'index')->name('history');
+                    Route::get('/history', 'history')->name('history');
                     Route::post('/check-in', 'checkIn')->name('checkin');
                     Route::post('/check-out', 'checkOut')->name('checkout');
                 });

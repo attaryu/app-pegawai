@@ -7,14 +7,14 @@
 
 @section('content')
     <div class="space-y-6">
-        <x-header title="Attendances History" :paginator="$attendances" />
+        <x-header title="Attendances" :paginator="$attendances" />
 
         <x-table.table>
             <x-table.head>
-                <x-table.heading>Tanggal</x-table.heading>
+                <x-table.heading>Date</x-table.heading>
                 <x-table.heading>Status</x-table.heading>
-                <x-table.heading>Waktu Masuk</x-table.heading>
-                <x-table.heading>Waktu Keluar</x-table.heading>
+                <x-table.heading>Check-in Time</x-table.heading>
+                <x-table.heading>Check-out Time</x-table.heading>
             </x-table.head>
 
             <x-table.body>

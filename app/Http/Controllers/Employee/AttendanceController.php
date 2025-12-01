@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function index(Request $request)
+    public function history(Request $request)
     {
         $employee = $request->user()->employee;
 
