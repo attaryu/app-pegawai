@@ -122,13 +122,14 @@ class DashboardController extends Controller
 
         $canCheckOut = false;
 
-        // Validasi check out (maksimal 12 jam setelah check in dan di hari yang sama)
+        // Validasi check out (minimal 6 jam dan maksimal 12 jam setelah check in dan di hari yang sama)
         if ($todayAttendance && $todayAttendance->waktu_masuk && !$todayAttendance->waktu_keluar) {
             $checkInTime = \Carbon\Carbon::parse($todayAttendance->tanggal . ' ' . $todayAttendance->waktu_masuk);
+            $minCheckOutTime = $checkInTime->copy()->addHours(6);
             $maxCheckOutTime = $checkInTime->copy()->addHours(12);
             $endOfDay = $now->copy()->endOfDay();
 
-            $canCheckOut = $now->between($checkInTime, $maxCheckOutTime) && $now->lessThanOrEqualTo($endOfDay);
+            $canCheckOut = $now->between($minCheckOutTime, $maxCheckOutTime) && $now->lessThanOrEqualTo($endOfDay);
         }
 
         return view('pages.dashboard.index', [

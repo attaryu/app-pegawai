@@ -97,10 +97,15 @@ class AttendanceController extends Controller
 
         // Validasi maksimal 12 jam setelah check in
         $checkInTime = \Carbon\Carbon::parse($todayAttendance->tanggal . ' ' . $todayAttendance->waktu_masuk);
+        $minCheckOutTime = $checkInTime->copy()->addHours(6);
         $maxCheckOutTime = $checkInTime->copy()->addHours(12);
 
         if (now()->greaterThan($maxCheckOutTime)) {
             return back()->with('error', 'Check out time exceeded (maximum 12 hours after check in)');
+        }
+
+        if (now()->lessThan($minCheckOutTime)) {
+            return back()->with('error', 'You can check out only after 6 hours of check in');
         }
 
         // Update waktu keluar
