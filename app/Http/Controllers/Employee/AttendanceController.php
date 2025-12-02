@@ -20,7 +20,7 @@ class AttendanceController extends Controller
             ->orderBy('tanggal', 'desc')
             ->paginate(10);
 
-        return view('pages.employee.attendance.index', [
+        return view('pages.employee.attendance.history', [
             'attendances' => $attendances,
             'employee' => $employee,
         ]);

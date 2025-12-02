@@ -30,6 +30,23 @@ Route::prefix('/dashboard')
         Route::middleware('role:employee')->name('employee.')->group(function () {
             Route::get('/statistic', [\App\Http\Controllers\Employee\EmployeeController::class, 'statistic'])->name('statistic');
 
+            Route::prefix('/profile')
+                ->name('profile.')
+                ->controller(\App\Http\Controllers\Employee\EmployeeController::class)
+                ->group(function () {
+                    Route::get('/', 'profile')->name('index');
+                    Route::get('/edit', 'editProfile')->name('edit');
+                    Route::patch('/update', 'updateProfile')->name('update');
+                });
+
+            Route::prefix('/password')
+                ->name('password.')
+                ->controller(\App\Http\Controllers\Employee\EmployeeController::class)
+                ->group(function () {
+                    Route::get('/edit', 'editPassword')->name('edit');
+                    Route::patch('/update', 'updatePassword')->name('update');
+                });
+
             Route::prefix('/attendances')
                 ->name('attendances.')
                 ->controller(\App\Http\Controllers\Employee\AttendanceController::class)

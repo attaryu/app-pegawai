@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Employee;
 use App\Models\Salary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-
     public function statistic(Request $request)
     {
         $employee = $request->user()->employee;
@@ -90,5 +91,76 @@ class EmployeeController extends Controller
             'salaryHistory' => $salaryHistory,
             'recentAttendances' => $recentAttendances
         ]);
+    }
+
+    public function profile(Request $request)
+    {
+        $employee = Employee::with(['department', 'position'])
+            ->where('id', $request->user()->employee->id)
+            ->first();
+
+        if (!$employee) {
+            return redirect()->route('dashboard.index')->with('error', 'Employee data not found');
+        }
+
+        return view('pages.employee.profile.index', [
+            'employee' => $employee,
+            'user' => $request->user()
+        ]);
+    }
+
+    public function editProfile(Request $request)
+    {
+        $employee = Employee::with(['department', 'position'])
+            ->where('id', $request->user()->employee->id)
+            ->first();
+
+        if (!$employee) {
+            return redirect()->route('dashboard.index')->with('error', 'Employee data not found');
+        }
+
+        return view('pages.employee.profile.update', [
+            'employee' => $employee
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+        $employee = $user->employee;
+
+        if (!$employee) {
+            return redirect()->route('dashboard.index')->with('error', 'Employee data not found');
+        }
+
+        $validated = $request->validate([
+            'nomor_telepon' => 'required|string|max:20',
+            'alamat' => 'required|string',
+            'email' => 'required|email|unique:employees,email,' . $employee->id,
+        ]);
+
+        $user->update(['email' => $validated['email']]);
+        $employee->update($validated);
+
+        return redirect()->route('dashboard.employee.profile.index')->with('success', 'Profile updated successfully');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('dashboard.employee.profile.index')->with('success', 'Password updated successfully');
+    }
+
+    public function editPassword()
+    {
+        return view('pages.employee.profile.password-update');
     }
 }

@@ -13,7 +13,10 @@
 
 <li>
     <a {{ $attributes->merge(['href' => $href, 'class' => $finalClass]) }}>
-        <i class="{{ $icon }} text-lg size-5"></i>
+        <span class="grid place-items-center size-5">
+            <i class="fa-solid {{ $icon }} text-lg"></i>
+        </span>
+
         <span class="flex-1 ms-3 whitespace-nowrap">{{ $slot }}</span>
     </a>
 </li>

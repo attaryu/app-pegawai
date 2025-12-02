@@ -12,8 +12,7 @@
         </a>
 
         <ul class="flex flex-col gap-2 font-medium mt-10">
-            <x-sidebar.item href="{{ route('dashboard.index') }}" route="dashboard.index"
-                icon="fa-solid fa-table-columns">
+            <x-sidebar.item href="{{ route('dashboard.index') }}" route="dashboard.index" icon="fa-table-columns">
                 Dashboard
             </x-sidebar.item>
         </ul>
@@ -24,12 +23,12 @@
                 <x-text as="small" class="mb-1">Employee</x-text>
 
                 <x-sidebar.item href="{{ route('dashboard.admin.employees.index') }}" route="dashboard.admin.employees.*"
-                    icon="fa-solid fa-address-card">
+                    icon="fa-address-card">
                     Employees
                 </x-sidebar.item>
 
                 <x-sidebar.item href="{{ route('dashboard.admin.leave-requests.index') }}"
-                    route="dashboard.admin.leave-requests.*" icon="fa-solid fa-umbrella-beach   ">
+                    route="dashboard.admin.leave-requests.*" icon="fa-umbrella-beach   ">
                     Leave Requests
                 </x-sidebar.item>
             </ul>
@@ -38,22 +37,22 @@
                 <x-text as="small" class="mb-1">Other</x-text>
 
                 <x-sidebar.item href="{{ route('dashboard.admin.departments.index') }}"
-                    route="dashboard.admin.departments.*" icon="fa-solid fa-building">
+                    route="dashboard.admin.departments.*" icon="fa-building">
                     Departments
                 </x-sidebar.item>
 
                 <x-sidebar.item href="{{ route('dashboard.admin.positions.index') }}" route="dashboard.admin.positions.*"
-                    icon="fa-solid fa-briefcase">
+                    icon="fa-briefcase">
                     Positions
                 </x-sidebar.item>
 
                 {{-- <x-sidebar.item href="{{ route('dashboard.admin.salaries.index') }}" route="dashboard.admin.salaries.*"
-                    icon="fa-solid fa-sack-dollar">
+                    icon="fa-sack-dollar">
                     Salaries
                 </x-sidebar.item>
 
                 <x-sidebar.item href="{{ route('dashboard.admin.attendances.index') }}"
-                    route="dashboard.admin.attendances.*" icon="fa-solid fa-clipboard-user">
+                    route="dashboard.admin.attendances.*" icon="fa-clipboard-user">
                     Attendances
                 </x-sidebar.item> --}}
             </ul>
@@ -63,8 +62,13 @@
             <ul class="flex flex-col gap-2 font-medium mt-5">
                 <x-text as="small" class="mb-1">Management</x-text>
 
+                <x-sidebar.item href="{{ route('dashboard.employee.profile.index') }}" route="dashboard.employee.profile.*"
+                    icon="fa-circle-user">
+                    Profile
+                </x-sidebar.item>
+
                 <x-sidebar.item href="{{ route('dashboard.employee.leave.index') }}" route="dashboard.employee.leave.*"
-                    icon="fa-solid fa-umbrella-beach">
+                    icon="fa-umbrella-beach">
                     Leave
                 </x-sidebar.item>
             </ul>
@@ -73,12 +77,12 @@
                 <x-text as="small" class="mb-1">Information</x-text>
 
                 <x-sidebar.item href="{{ route('dashboard.employee.statistic') }}" route="dashboard.employee.statistic.*"
-                    icon="fa-solid fa-chart-line">
+                    icon="fa-chart-line">
                     Statistic
                 </x-sidebar.item>
 
                 <x-sidebar.item href="{{ route('dashboard.employee.attendances.history') }}"
-                    route="dashboard.employee.attendances.history" icon="fa-solid fa-clipboard-user">
+                    route="dashboard.employee.attendances.history" icon="fa-clipboard-user">
                     Attendance
                 </x-sidebar.item>
             </ul>

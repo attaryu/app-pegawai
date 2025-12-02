@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="space-y-6">
-        <x-header title="Attendances" :paginator="$attendances" />
+        <x-header title="Attendances History" :paginator="$attendances" />
 
         <x-table.table>
             <x-table.head>
