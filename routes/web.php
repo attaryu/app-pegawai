@@ -75,7 +75,13 @@ Route::middleware(['auth'])->group(function () {
                         Route::patch('/requests/{id}/cancel', 'cancel')->name('cancel');
                     });
 
-                Route::get('/salaries/history', [\App\Http\Controllers\Employee\SalaryController::class, 'index'])->name('salaries.history');
+                Route::prefix('/salaries')
+                    ->name('salaries.')
+                    ->controller(\App\Http\Controllers\Employee\SalaryController::class)
+                    ->group(function () {
+                        Route::get('/history', 'index')->name('history');
+                        Route::get('/{id}/print', 'printSlip')->name('print');
+                    });
             });
         });
 });

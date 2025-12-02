@@ -71,6 +71,7 @@
                         <x-table.heading>Allowance</x-table.heading>
                         <x-table.heading>Deduction</x-table.heading>
                         <x-table.heading>Total</x-table.heading>
+                        <x-table.heading>Action</x-table.heading>
                     </x-table.head>
 
                     <x-table.body>
@@ -93,6 +94,18 @@
                                     <x-text as="span" class="font-semibold text-brand">
                                         {{ $format($salary->total_gaji) }}
                                     </x-text>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    <x-button
+                                        as="a"
+                                        href="{{ route('dashboard.employee.salaries.print', $salary->id) }}"
+                                        variant="secondary"
+                                        size="sm"
+                                        target="_blank"
+                                    >
+                                        <i class="fa-solid fa-print"></i>
+                                        Print Slip
+                                    </x-button>
                                 </x-table.cell>
                             </x-table.row>
                         @endforeach

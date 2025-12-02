@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Salary;
 use Illuminate\Http\Request;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 class SalaryController extends Controller
 {
@@ -37,5 +38,31 @@ class SalaryController extends Controller
             'currentMonthSalary' => $currentMonthSalary,
             'currentMonth' => $currentMonth
         ]);
+    }
+
+    public function printSlip(Request $request, $id)
+    {
+        $employee = $request->user()->employee;
+
+        if (!$employee) {
+            return redirect()->route('dashboard.index')->with('error', 'Employee data not found');
+        }
+
+        $salary = Salary::with('employee.department', 'employee.position')
+            ->where('id', $id)
+            ->where('karyawan_id', $employee->id)
+            ->first();
+
+        if (!$salary) {
+            return redirect()->route('dashboard.employee.salaries.history')->with('error', 'Salary record not found');
+        }
+
+        return Pdf::view('pages.employee.salary-slip', [
+            'salary' => $salary,
+            'employee' => $employee
+        ])
+            ->format('a4')
+            ->name('salary-slip-' . str_replace(' ', '-', $salary->bulan) . '.pdf')
+            ->download();
     }
 }
