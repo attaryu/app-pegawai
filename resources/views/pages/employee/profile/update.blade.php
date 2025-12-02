@@ -19,6 +19,25 @@
                 @method('PATCH')
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{-- Full Name --}}
+                    <x-input
+                        label="Full Name"
+                        type="text"
+                        id="nama_lengkap"
+                        name="nama_lengkap"
+                        :value="old('nama_lengkap', $employee->nama_lengkap)"
+                        required
+                    />
+
+                    {{-- Date of Birth --}}
+                    <x-date-picker
+                        label="Date of Birth"
+                        id="tanggal_lahir"
+                        name="tanggal_lahir"
+                        :value="$employee->tanggal_lahir"
+                        required
+                    />
+
                     {{-- Email --}}
                     <x-input
                         label="Email"
@@ -53,20 +72,8 @@
 
                 {{-- Read-only Information --}}
                 <div class="border-t pt-6">
-                    <x-text as="h4" variant="h5" class="mb-4 text-gray-700">Read-only Information</x-text>
+                    <x-text as="h4" variant="h5" class="mb-4 text-gray-700">Company Information (Read-only)</x-text>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <x-text as="label" class="text-gray-500 text-sm">Full Name</x-text>
-                            <x-text as="p" class="font-medium text-gray-600">{{ $employee->nama_lengkap }}</x-text>
-                        </div>
-
-                        <div>
-                            <x-text as="label" class="text-gray-500 text-sm">Date of Birth</x-text>
-                            <x-text as="p" class="font-medium text-gray-600">
-                                {{ \Carbon\Carbon::parse($employee->tanggal_lahir)->format('d F Y') }}
-                            </x-text>
-                        </div>
-
                         <div>
                             <x-text as="label" class="text-gray-500 text-sm">Department</x-text>
                             <x-text as="p" class="font-medium text-gray-600">{{ $employee->department->nama_departemen ?? '-' }}</x-text>

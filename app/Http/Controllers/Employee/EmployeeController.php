@@ -134,6 +134,8 @@ class EmployeeController extends Controller
         }
 
         $validated = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
             'nomor_telepon' => 'required|string|max:20',
             'alamat' => 'required|string',
             'email' => 'required|email|unique:employees,email,' . $employee->id,
