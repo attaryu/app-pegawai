@@ -46,7 +46,7 @@
                     Positions
                 </x-sidebar.item>
 
-                {{-- <x-sidebar.item href="{{ route('dashboard.admin.salaries.index') }}" route="dashboard.admin.salaries.*"
+                <x-sidebar.item href="{{ route('dashboard.admin.salaries.index') }}" route="dashboard.admin.salaries.*"
                     icon="fa-sack-dollar">
                     Salaries
                 </x-sidebar.item>
@@ -54,7 +54,7 @@
                 <x-sidebar.item href="{{ route('dashboard.admin.attendances.index') }}"
                     route="dashboard.admin.attendances.*" icon="fa-clipboard-user">
                     Attendances
-                </x-sidebar.item> --}}
+                </x-sidebar.item>
             </ul>
         @endcan
 
@@ -84,6 +84,11 @@
                 <x-sidebar.item href="{{ route('dashboard.employee.attendances.history') }}"
                     route="dashboard.employee.attendances.history" icon="fa-clipboard-user">
                     Attendance
+                </x-sidebar.item>
+
+                <x-sidebar.item href="{{ route('dashboard.employee.salaries.history') }}"
+                    route="dashboard.employee.salaries.history" icon="fa-sack-dollar">
+                    Salary
                 </x-sidebar.item>
             </ul>
         @endcan

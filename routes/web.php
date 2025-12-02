@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::resource('departments', \App\Http\Controllers\Admin\DepartmentController::class);
                 Route::resource('positions', \App\Http\Controllers\Admin\PositionController::class);
                 Route::resource('attendances', \App\Http\Controllers\Admin\AttendanceController::class)->except(['show']);
-                Route::resource('salaries', \App\Http\Controllers\SalaryController::class)->except(['show']);
+                Route::resource('salaries', \App\Http\Controllers\Admin\SalaryController::class)->except(['show']);
 
                 Route::prefix('/leave-requests')
                     ->controller(\App\Http\Controllers\Admin\LeaveController::class)
@@ -74,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
                         Route::post('/requests', 'store')->name('store');
                         Route::patch('/requests/{id}/cancel', 'cancel')->name('cancel');
                     });
+
+                Route::get('/salaries/history', [\App\Http\Controllers\Employee\SalaryController::class, 'index'])->name('salaries.history');
             });
         });
 });

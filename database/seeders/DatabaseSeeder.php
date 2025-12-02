@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendance;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Role;
+use App\Models\Salary;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -35,7 +37,7 @@ class DatabaseSeeder extends Seeder
         $employeeRole = Role::factory()->create();
 
         // Create employees (15-20 employees)
-        Employee::factory()
+        $employees = Employee::factory()
             ->count(rand(15, 20))
             ->sequence(fn() => [
                 'departemen_id' => $departments->random()->id,
@@ -55,5 +57,30 @@ class DatabaseSeeder extends Seeder
                     $employee->save();
                 }
             });
+
+        // Create attendance records for each employee (last 6 months)
+        $employees->each(function ($employee) {
+            // Generate 50-80 attendance records per employee
+            Attendance::factory()
+                ->count(rand(30, 50))
+                ->create([
+                    'karyawan_id' => $employee->id,
+                ]);
+        });
+
+        // Create salary records for each employee (last 6-12 months)
+        $currentMonth = now()->month;
+
+        $employees->each(function ($employee) {
+            $position = $employee->position;
+
+            // Generate salary untuk beberapa bulan terakhir
+            for ($i = 11; $i >= 0; $i--) {
+                Salary::factory()->create([
+                    'karyawan_id' => $employee->id,
+                    'gaji_pokok' => $position->gaji_pokok,
+                ]);
+            }
+        });
     }
 }

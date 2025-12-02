@@ -17,9 +17,10 @@ class AttendanceFactory extends Factory
      */
     public function definition(): array
     {
-        $status = fake()->randomElement(['hadir', 'izin', 'sakit', 'alpha']);
+        // Tanpa 'izin' karena itu untuk leave request
+        $status = fake()->randomElement(['present', 'alpha']);
 
-        if ($status === 'hadir') {
+        if ($status === 'present') {
             $masuk = fake()->dateTimeBetween('07:00:00', '09:30:00');
             $keluar = fake()->dateTimeBetween('16:00:00', '18:00:00');
 
