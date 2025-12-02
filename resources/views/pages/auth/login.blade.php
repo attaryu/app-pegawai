@@ -4,20 +4,36 @@
 
 @section('content')
     <div class="h-dvh flex items-center justify-center px-4">
-        <x-card class="max-w-sm">
-            <form action="#" method="POST" class="flex flex-col gap-4">
-                @csrf
+        <div class="max-w-sm w-full space-y-4">
+            @if (session('success'))
+                <x-alert variant="success" dismissible>
+                    {{ session('success') }}
+                </x-alert>
+            @endif
 
-                <x-text as="h1" variant="h4" class="mb-4">Sign in to our platform</x-text>
+            @if (session('error'))
+                <x-alert variant="danger" dismissible>
+                    {{ session('error') }}
+                </x-alert>
+            @endif
 
-                <x-input label="Your email" type="email" name="email" placeholder="example@company.com" required />
+            <x-card>
+                <form action="{{ route('login.process') }}" method="POST" class="flex flex-col gap-4">
+                    @csrf
 
-                <x-input label="Your password" type="password" name="password" placeholder="•••••••••" required />
+                    <x-text as="h1" variant="h4" class="mb-4">Sign in to our platform</x-text>
 
-                <x-button type="submit" class="w-full mt-4">
-                    Login to your account
-                </x-button>
-            </form>
-        </x-card>
+                    <x-input label="Email" type="email" name="email" placeholder="example@company.com" required />
+
+                    <x-input label="Password" type="password" name="password" placeholder="Your password" required />
+
+                    <x-checkbox label="Remember me" id="remember" name="remember" />
+
+                    <x-button type="submit" class="w-full mt-4">
+                        Login to your account
+                    </x-button>
+                </form>
+            </x-card>
+        </div>
     </div>
 @endsection
